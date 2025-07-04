@@ -1,0 +1,43 @@
+@font-face {
+    font-family: poppins;
+    src: url(/public/font/Poppins-Light.ttf);
+}
+@font-face {
+    font-family: var;
+    src: url("/public/font/Outfit-VariableFont_wght.ttf");
+}
+@font-face {
+    font-family: quick;
+    src: url("/public/font/Quicksand-VariableFont_wght.ttf");
+}
+@font-face {
+    font-family: arquivo;
+    src: url(/public/font/Archivo-VariableFont_wdth\,wght.ttf);
+}
+@font-face {
+    font-family: karla;
+    src: url(/public/font/Karla-VariableFont_wght.ttf);
+}
+@font-face {
+    font-family: jersey;
+    src: url(/public/font/Jersey10-Regular.ttf);
+}
+@font-face {
+    font-family: rubik;
+    src: url(/public/font/Rubik-VariableFont_wght.ttf);
+}
+@font-face {
+    font-family: inter;
+    src: url(/public/font/Inter-VariableFont_opsz\,wght.ttf);
+}
+@font-face {
+    font-family: play;
+    src: url(/public/font/PlayfairDisplay-VariableFont_wght.ttf);
+}
+*{
+    font-family: karla;
+    outline: none;
+    margin: 0;
+    padding: 0;
+
+}
