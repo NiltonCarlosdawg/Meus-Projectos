@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+    <!-- Servidor XAMPP -->
+    <g transform="translate(100,50)">
+        <rect x="0" y="0" width="200" height="180" fill="#f5f5f5" stroke="#000" stroke-width="2"/>
+        <text x="40" y="30" font-family="Arial" font-size="14"><<device>></text>
+        <text x="30" y="50" font-family="Arial" font-size="16" font-weight="bold">Servidor XAMPP</text>
+        <rect x="20" y="70" width="160" height="90" fill="#fff" stroke="#000"/>
+        <text x="50" y="90" font-family="Arial" font-size="12">Apache 2.4</text>
+        <text x="50" y="110" font-family="Arial" font-size="12">PHP 8.0</text>
+        <text x="50" y="130" font-family="Arial" font-size="12">MySQL 8.0</text>
+        <text x="50" y="150" font-family="Arial" font-size="12">phpMyAdmin</text>
+    </g>
+
+    <!-- Sistema TFC -->
+    <g transform="translate(500,50)">
+        <rect x="0" y="0" width="200" height="180" fill="#f5f5f5" stroke="#000" stroke-width="2"/>
+        <text x="40" y="30" font-family="Arial" font-size="14"><<artifact>></text>
+        <text x="30" y="50" font-family="Arial" font-size="16" font-weight="bold">Sistema TFC</text>
+        <rect x="20" y="70" width="160" height="90" fill="#fff" stroke="#000"/>
+        <text x="40" y="90" font-family="Arial" font-size="12">Módulos PHP</text>
+        <text x="40" y="110" font-family="Arial" font-size="12">Interface Web</text>
+        <text x="40" y="130" font-family="Arial" font-size="12">Banco de Dados</text>
+        <text x="40" y="150" font-family="Arial" font-size="12">Arquivos Upload</text>
+    </g>
+
+    <!-- Cliente Web -->
+    <g transform="translate(300,350)">
+        <rect x="0" y="0" width="200" height="150" fill="#f5f5f5" stroke="#000" stroke-width="2"/>
+        <text x="40" y="30" font-family="Arial" font-size="14"><<device>></text>
+        <text x="40" y="50" font-family="Arial" font-size="16" font-weight="bold">Cliente Web</text>
+        <rect x="20" y="70" width="160" height="60" fill="#fff" stroke="#000"/>
+        <text x="45" y="95" font-family="Arial" font-size="12">Navegador Web</text>
+        <text x="45" y="115" font-family="Arial" font-size="12">(Chrome/Firefox/Safari)</text>
+    </g>
+
+    <!-- Conexões -->
+    <!-- XAMPP para Sistema TFC -->
+    <line x1="300" y1="125" x2="500" y2="125" stroke="#000" stroke-width="2"/>
+    <text x="370" y="115" font-family="Arial" font-size="12">Local Host</text>
+    <text x="360" y="130" font-family="Arial" font-size="12">http://localhost</text>
+
+    <!-- Cliente para XAMPP -->
+    <line x1="400" y1="350" x2="200" y2="230" stroke="#000" stroke-width="2"/>
+    <text x="270" y="290" font-family="Arial" font-size="12">HTTP/HTTPS</text>
+
+    <!-- Especificações -->
+    <g transform="translate(50,520)">
+        <text x="0" y="0" font-family="Arial" font-size="12" font-weight="bold">Requisitos do Sistema:</text>
+        <text x="0" y="20" font-family="Arial" font-size="12">- XAMPP: Apache 2.4+, PHP 8.0+, MySQL 8.0+</text>
+        <text x="0" y="40" font-family="Arial" font-size="12">- Hardware: 4GB RAM, 2 CPU cores mínimo</text>
+        <text x="0" y="60" font-family="Arial" font-size="12">- SO: Windows/Linux/MacOS com suporte XAMPP</text>
+    </g>
+</svg>

@@ -1,0 +1,9 @@
+{
+    "name": "sistematfc/app",
+    "description": "Sistema de Gestão de TFC",
+    "type": "project",
+    "require": {
+        "tecnickcom/tcpdf": "^6.6",
+        "dompdf/dompdf": "^3.1"
+    }
+}

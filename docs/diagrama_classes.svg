@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1000" viewBox="0 0 1200 1000">
+  <defs>
+    <style type="text/css">
+      .class-box { fill: white; stroke: black; stroke-width: 2; }
+      .class-name { font-family: Arial; font-size: 16px; font-weight: bold; }
+      .attribute { font-family: Arial; font-size: 14px; }
+      .method { font-family: Arial; font-size: 14px; }
+      .relationship { stroke: black; stroke-width: 2; fill: none; }
+      .arrow { fill: black; }
+    </style>
+  </defs>
+
+  <!-- Classe Usuario (Abstract) -->
+  <g transform="translate(500,50)">
+    <rect class="class-box" width="200" height="200"/>
+    <text x="100" y="30" text-anchor="middle" class="class-name">«abstract»\nUsuario</text>
+    <line x1="0" y1="40" x2="200" y2="40" stroke="black"/>
+    <text x="10" y="60" class="attribute">- id: int</text>
+    <text x="10" y="80" class="attribute">- nome: string</text>
+    <text x="10" y="100" class="attribute">- email: string</text>
+    <text x="10" y="120" class="attribute">- senha: string</text>
+    <text x="10" y="140" class="attribute">- tipo_usuario: enum</text>
+    <text x="10" y="160" class="attribute">- status: boolean</text>
+    <line x1="0" y1="170" x2="200" y2="170" stroke="black"/>
+    <text x="10" y="190" class="method">+ login(): bool</text>
+  </g>
+
+  <!-- Classe Professor -->
+  <g transform="translate(100,300)">
+    <rect class="class-box" width="180" height="120"/>
+    <text x="90" y="30" text-anchor="middle" class="class-name">Professor</text>
+    <line x1="0" y1="40" x2="180" y2="40" stroke="black"/>
+    <text x="10" y="60" class="attribute">- area_atuacao: string</text>
+    <text x="10" y="80" class="attribute">- regime_trabalho: string</text>
+    <line x1="0" y1="90" x2="180" y2="90" stroke="black"/>
+    <text x="10" y="110" class="method">+ gerenciarDisciplinas()</text>
+  </g>
+
+  <!-- Classe Orientador -->
+  <g transform="translate(350,300)">
+    <rect class="class-box" width="180" height="140"/>
+    <text x="90" y="30" text-anchor="middle" class="class-name">Orientador</text>
+    <line x1="0" y1="40" x2="180" y2="40" stroke="black"/>
+    <text x="10" y="60" class="attribute">- area_orientacao: string</text>
+    <text x="10" y="80" class="attribute">- qtd_orientandos: int</text>
+    <text x="10" y="100" class="attribute">- disponivel: boolean</text>
+    <line x1="0" y1="110" x2="180" y2="110" stroke="black"/>
+    <text x="10" y="130" class="method">+ avaliarProjeto()</text>
+  </g>
+
+  <!-- Classe Coorientador -->
+  <g transform="translate(600,300)">
+    <rect class="class-box" width="180" height="140"/>
+    <text x="90" y="30" text-anchor="middle" class="class-name">Coorientador</text>
+    <line x1="0" y1="40" x2="180" y2="40" stroke="black"/>
+    <text x="10" y="60" class="attribute">- area_coorientacao: string</text>
+    <text x="10" y="80" class="attribute">- qtd_orientandos: int</text>
+    <text x="10" y="100" class="attribute">- disponivel: boolean</text>
+    <line x1="0" y1="110" x2="180" y2="110" stroke="black"/>
+    <text x="10" y="130" class="method">+ auxiliarOrientacao()</text>
+  </g>
+
+  <!-- Classe Estudante -->
+  <g transform="translate(850,300)">
+    <rect class="class-box" width="180" height="160"/>
+    <text x="90" y="30" text-anchor="middle" class="class-name">Estudante</text>
+    <line x1="0" y1="40" x2="180" y2="40" stroke="black"/>
+    <text x="10" y="60" class="attribute">- curso: string</text>
+    <text x="10" y="80" class="attribute">- numero_processo: string</text>
+    <text x="10" y="100" class="attribute">- tema_defesa: string</text>
+    <text x="10" y="120" class="attribute">- data_defesa: date</text>
+    <line x1="0" y1="130" x2="180" y2="130" stroke="black"/>
+    <text x="10" y="150" class="method">+ submeterProjeto()</text>
+  </g>
+
+  <!-- Classe Projeto -->
+  <g transform="translate(500,550)">
+    <rect class="class-box" width="200" height="180"/>
+    <text x="100" y="30" text-anchor="middle" class="class-name">Projeto</text>
+    <line x1="0" y1="40" x2="200" y2="40" stroke="black"/>
+    <text x="10" y="60" class="attribute">- id: int</text>
+    <text x="10" y="80" class="attribute">- titulo: string</text>
+    <text x="10" y="100" class="attribute">- descricao: text</text>
+    <text x="10" y="120" class="attribute">- area_pesquisa: string</text>
+    <text x="10" y="140" class="attribute">- status: enum</text>
+    <line x1="0" y1="150" x2="200" y2="150" stroke="black"/>
+    <text x="10" y="170" class="method">+ atualizarStatus()</text>
+  </g>
+
+  <!-- Classe Documento -->
+  <g transform="translate(500,800)">
+    <rect class="class-box" width="200" height="140"/>
+    <text x="100" y="30" text-anchor="middle" class="class-name">Documento</text>
+    <line x1="0" y1="40" x2="200" y2="40" stroke="black"/>
+    <text x="10" y="60" class="attribute">- id: int</text>
+    <text x="10" y="80" class="attribute">- nome: string</text>
+    <text x="10" y="100" class="attribute">- tipo: string</text>
+    <line x1="0" y1="110" x2="200" y2="110" stroke="black"/>
+    <text x="10" y="130" class="method">+ upload()</text>
+  </g>
+
+  <!-- Relacionamentos -->
+  <!-- Herança de Usuario para Professor -->
+  <path class="relationship" d="M 190,300 L 190,150 L 500,150"/>
+  <polygon class="arrow" points="500,150 490,145 490,155"/>
+
+  <!-- Herança de Usuario para Orientador -->
+  <path class="relationship" d="M 440,300 L 440,150 L 500,150"/>
+  <polygon class="arrow" points="500,150 490,145 490,155"/>
+
+  <!-- Herança de Usuario para Coorientador -->
+  <path class="relationship" d="M 690,300 L 690,150 L 700,150"/>
+  <polygon class="arrow" points="700,150 710,145 710,155"/>
+
+  <!-- Herança de Usuario para Estudante -->
+  <path class="relationship" d="M 940,300 L 940,150 L 700,150"/>
+  <polygon class="arrow" points="700,150 710,145 710,155"/>
+
+  <!-- Associação entre Orientador e Estudante -->
+  <line class="relationship" x1="530" y1="370" x2="850" y2="370"/>
+  <text x="690" y="360" text-anchor="middle" class="attribute">orienta</text>
+  <text x="540" y="390" class="attribute">1</text>
+  <text x="840" y="390" class="attribute">*</text>
+
+  <!-- Associação entre Coorientador e Estudante -->
+  <line class="relationship" x1="780" y1="370" x2="850" y2="370"/>
+  <text x="815" y="360" text-anchor="middle" class="attribute">coorientado por</text>
+  <text x="790" y="390" class="attribute">0..1</text>
+  <text x="840" y="390" class="attribute">*</text>
+
+  <!-- Associação entre Estudante e Projeto -->
+  <line class="relationship" x1="940" y1="460" x2="940" y2="640" x2="700" y2="640"/>
+  <text x="820" y="630" text-anchor="middle" class="attribute">desenvolve</text>
+  <text x="930" y="480" class="attribute">1</text>
+  <text x="710" y="630" class="attribute">1</text>
+
+  <!-- Associação entre Projeto e Documento -->
+  <line class="relationship" x1="600" y1="730" x2="600" y2="800"/>
+  <text x="620" y="765" text-anchor="middle" class="attribute">possui</text>
+  <text x="590" y="750" class="attribute">1</text>
+  <text x="590" y="790" class="attribute">*</text>
+</svg>
