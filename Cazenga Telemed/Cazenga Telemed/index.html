@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cazenga Telemed - Início</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <main class="page-container index-container">
+        <header>
+            <h1>Bem-vindo ao Cazenga Telemed</h1>
+        </header>
+        <section>
+            <p style="margin-bottom: 30px; font-size: 1.1rem; color: var(--text-light);">
+                Sua plataforma de telemedicina para um atendimento de saúde mais próximo e eficiente.
+            </p>
+            <a href="Login.html" class="btn">Acessar Plataforma</a>
+        </section>
+        <footer style="margin-top: 30px; font-size: 0.8rem; color: #aaa;">
+            <p>&copy; <span id="currentYear"></span> Cazenga Telemed. Todos os direitos reservados.</p>
+        </footer>
+    </main>
+      
+    <script>
+        //  script para o ano atual no rodapé
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

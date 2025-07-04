@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cazenga Telemed Online - Portal do Paciente</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="home-page">
+  <header class="site-header">
+    <div class="logo">
+      <i class="fas fa-heart-pulse"></i> Cazenga Telemed
+    </div>
+    <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false">
+      <i class="fas fa-bars"></i>
+    </button>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="#inicio" class="nav-link-item">Início</a></li>
+        <li><a href="#servicos" class="nav-link-item">Serviços</a></li>
+        <li><a href="#marcar" class="nav-link-item">Marcar Consulta</a></li>
+        <li><a href="#consultas" class="nav-link-item">Consultas Online</a></li>
+        <li><a href="#mensagens" class="nav-link-item">Mensagens</a></li>
+        <li id="loginLinkContainer"><a href="login.html" id="loginLink" class="btn btn-nav-action btn-login">Login</a></li>
+        <li id="CadastroLinkContainer"><a href="cadastro.html" id="CadastroLink" class="btn btn-nav-action btn-signup" >Cadastre-se</a></li>
+        <li id="userGreetingContainer" style="display: none;" class="nav-user-greeting"><span id="userGreeting"></span></li>
+        <li id="logoutButtonContainer" style="display: none;"><a href="login.html" id="logoutButton" class="btn btn-nav-action btn-logout">Sair</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="inicio" class="hero content-section" aria-label="Boas-vindas">
+      <h1>Bem-vindo ao Portal do Paciente</h1>
+      <p>Atendimento humanizado, tecnologia e saúde ao seu alcance. Marque consultas, acesse seu histórico e fale com nossos especialistas.</p>
+      <a href="#marcar" class="btn btn-primary scroll-link">
+        <i class="fas fa-calendar-check"></i> Marcar Consulta
+      </a>
+    </section>
+
+    <section id="servicos" class="content-section" aria-label="Serviços Oferecidos">
+      <h2 class="section-title">Nossos Serviços</h2>
+      <div class="servicos-lista">
+        <article class="servico-card">
+          <div class="servico-icon"><i class="fas fa-stethoscope"></i></div>
+          <h3>Clínica Geral</h3>
+          <p>Consultas de rotina, acompanhamento e orientação médica.</p>
+        </article>
+        <article class="servico-card">
+          <div class="servico-icon"><i class="fas fa-baby"></i></div>
+          <h3>Pediatria</h3>
+          <p>Atendimento especializado para crianças e adolescentes.</p>
+        </article>
+        <article class="servico-card">
+          <div class="servico-icon"><i class="fas fa-laptop-medical"></i></div>
+          <h3>Telemedicina</h3>
+          <p>Consultas por vídeo, sem sair de casa.</p>
+        </article>
+        <article class="servico-card">
+          <div class="servico-icon"><i class="fas fa-file-waveform"></i></div>
+          <h3>Exames e Resultados</h3>
+          <p>Acesso rápido e seguro aos seus exames.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="marcar" class="content-section" aria-label="Marcar Consulta">
+      <h2 class="section-title">Marcar Consulta</h2>
+      <div class="restricted-content" style="display:none;">
+        <p class="restricted-message"><i class="fas fa-lock"></i> Para marcar uma consulta, por favor, <a href="login.html">faça login</a> ou <a href="cadastro.html">cadastre-se</a>.</p>
+      </div>
+      <form id="formConsulta" class="styled-form">
+        <div class="form-group">
+          <label for="especialidade">Especialidade:</label>
+          <select id="especialidade" name="especialidade" class="form-control" required>
+            <option value="">Selecione</option>
+            <option value="clinica_geral">Clínica Geral</option>
+            <option value="pediatria">Pediatria</option>
+            <option value="telemedicina_agendada">Telemedicina (Agendada)</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="data">Data:</label>
+            <input type="date" id="data" name="data" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="hora">Horário:</label>
+            <input type="time" id="hora" name="hora" class="form-control" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="nomePacienteConsulta">Nome Completo (Paciente):</label>
+          <input type="text" id="nomePacienteConsulta" name="nomePacienteConsulta" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="emailPacienteConsulta">E-mail (para confirmação):</label>
+          <input type="email" id="emailPacienteConsulta" name="emailPacienteConsulta" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-success">
+          <i class="fas fa-check-circle"></i> Agendar Consulta
+        </button>
+      </form>
+      <div id="confirmacaoConsulta" aria-live="polite" class="form-feedback"></div>
+    </section>
+
+    <section id="consultas" class="content-section" aria-label="Consultas Online">
+      <h2 class="section-title">Consultas Online</h2>
+      <div class="restricted-content" style="display:none;">
+         <p class="restricted-message"><i class="fas fa-lock"></i> Para acessar a sala de videochamada, por favor, <a href="login.html">faça login</a>.</p>
+      </div>
+      <div class="loggedIn-content">
+        <p>Se você já tem uma consulta agendada, clique abaixo no horário marcado para iniciar sua videochamada.</p>
+        <button id="btnVideo" class="btn btn-primary">
+          <i class="fas fa-video"></i> Iniciar Videochamada Agendada
+        </button>
+        <div id="videoArea" style="display: none;" class="video-container">
+          <iframe src="about:blank" data-src="https://meet.jit.si/CazengaTelemedPaciente" width="100%" height="450" allow="camera; microphone; display-capture" title="Videochamada" class="video-iframe"></iframe>
+        </div>
+      </div>
+    </section>
+    
+    <section id="mensagens" class="content-section" aria-label="Mensagens com a Clínica">
+        <h2 class="section-title">Minhas Mensagens</h2>
+        <div class="restricted-content" style="display:none;">
+            <p class="restricted-message"><i class="fas fa-lock"></i> Para acessar suas mensagens, por favor, <a href="login.html">faça login</a>.</p>
+        </div>
+        <div class="chat-container loggedIn-content">
+            <div class="chat-header-patient">
+                <div class="chat-avatar-patient"><i class="fas fa-user-doctor"></i></div>
+                <h3 id="chatWithDoctorName">Conversa com Dr(a). Nilton</h3> 
+            </div>
+            <div class="chat-messages-patient" id="chatMessagesPatient">
+                
+                <div class="message-bubble-patient received-patient">
+                    <p>Olá! Como posso ajudar hoje?</p>
+                    <span class="message-timestamp-patient">10:30</span>
+                </div>
+                <div class="message-bubble-patient sent-patient">
+                    <p>Bom dia! Gostaria de tirar uma dúvida sobre minha medicação.</p>
+                    <span class="message-timestamp-patient">10:32</span>
+                </div>
+                 <div class="message-bubble-patient received-patient">
+                    <p>Claro, pode perguntar.</p>
+                    <span class="message-timestamp-patient">10:33</span>
+                </div>
+            </div>
+            <div class="chat-input-patient">
+                <textarea id="patientMessageInput" placeholder="Digite sua mensagem..." rows="1"></textarea>
+                <button id="sendPatientMessageBtn" class="btn btn-send-patient" aria-label="Enviar mensagem">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="areaPaciente" class="content-section" aria-label="Área do Paciente">
+      <h2 class="section-title">Minha Área (Em Breve)</h2>
+       <div class="restricted-content" style="display:none;">
+            <p class="restricted-message"><i class="fas fa-lock"></i> Para acessar sua área pessoal, por favor, <a href="login.html">faça login</a>.</p>
+        </div>
+      <ul class="paciente-links loggedIn-content">
+        <li><a href="#"><i class="fas fa-history"></i> Histórico de Consultas</a></li>
+        <li><a href="#"><i class="fas fa-notes-medical"></i> Resultados de Exames</a></li>
+        <li><a href="#mensagens" class="scroll-link"><i class="fas fa-envelope"></i> Minhas Mensagens</a></li>
+        <li><a href="#"><i class="fas fa-user-edit"></i> Meus Dados</a></li>
+      </ul>
+    </section>
+
+   
+  </main>
+
+  <footer class="site-footer-bottom">
+    <p>&copy; <span id="currentYear"></span> Cazenga Telemed Online. Todos os direitos reservados.</p>
+    <p><a href="#privacidade">Política de Privacidade</a> | <a href="#termos">Termos de Uso</a></p>
+  </footer>
+  
+  <script src="https://meet.jit.si/external_api.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const navToggle = document.querySelector('.nav-toggle');
+        const mainNav = document.querySelector('.main-nav');
+        const navLinks = document.querySelectorAll('.main-nav .nav-link-item, .scroll-link');
+        const currentYearSpan = document.getElementById('currentYear');
+        if(currentYearSpan) currentYearSpan.textContent = new Date().getFullYear();
+
+        const loggedInUser = localStorage.getItem('loggedInUser'); 
+        const userGreeting = document.getElementById('userGreeting');
+        const loginLinkContainer = document.getElementById('loginLinkContainer');
+        const cadastroLinkContainer = document.getElementById('CadastroLinkContainer');
+        const userGreetingContainer = document.getElementById('userGreetingContainer');
+        const logoutButtonContainer = document.getElementById('logoutButtonContainer');
+        
+        const restrictedSections = document.querySelectorAll('.restricted-content');
+        const loggedInSectionsContent = document.querySelectorAll('.loggedIn-content');
+
+        if (loggedInUser) {
+            if(userGreeting) userGreeting.textContent = `Olá, ${loggedInUser}!`;
+            if(loginLinkContainer) loginLinkContainer.style.display = 'none';
+            if(cadastroLinkContainer) cadastroLinkContainer.style.display = 'none';
+            if(userGreetingContainer) userGreetingContainer.style.display = 'block'; 
+            if(logoutButtonContainer) logoutButtonContainer.style.display = 'block';
+
+            restrictedSections.forEach(rs => rs.style.display = 'none');
+            loggedInSectionsContent.forEach(lis => {
+                if (lis.closest('form')) { 
+                    lis.closest('form').style.display = 'block';
+                } else {
+                    lis.style.display = 'block'; 
+                }
+            });
+            
+            document.querySelectorAll('#formConsulta, #consultas .loggedIn-content, #mensagens .loggedIn-content, #areaPaciente .loggedIn-content')
+                .forEach(el => el.style.display = 'block');
+
+
+        } else {
+            if(loginLinkContainer) loginLinkContainer.style.display = 'block';
+            if(cadastroLinkContainer) cadastroLinkContainer.style.display = 'block';
+            if(userGreetingContainer) userGreetingContainer.style.display = 'none';
+            if(logoutButtonContainer) logoutButtonContainer.style.display = 'none';
+
+            restrictedSections.forEach(rs => rs.style.display = 'block');
+            loggedInSectionsContent.forEach(lis => {
+                 if (lis.closest('form')) {
+                    lis.closest('form').style.display = 'none';
+                } else {
+                    lis.style.display = 'none';
+                }
+            });
+            
+            document.querySelectorAll('#formConsulta, #consultas .loggedIn-content, #mensagens .loggedIn-content, #areaPaciente .loggedIn-content')
+                .forEach(el => el.style.display = 'none');
+        }
+
+        if (logoutButtonContainer) {
+            logoutButtonContainer.querySelector('a').addEventListener('click', (e) => {
+                e.preventDefault();
+                localStorage.removeItem('loggedInUser');
+                window.location.href = 'login.html'; 
+            });
+        }
+
+
+        if (navToggle && mainNav) {
+            navToggle.addEventListener('click', () => {
+                const isExpanded = navToggle.getAttribute('aria-expanded') === 'true' || false;
+                navToggle.setAttribute('aria-expanded', !isExpanded);
+                mainNav.classList.toggle('active');
+                navToggle.querySelector('i').classList.toggle('fa-bars');
+                navToggle.querySelector('i').classList.toggle('fa-times');
+            });
+        }
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    e.preventDefault();
+                    const targetId = href.substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        
+                        const headerOffset = document.querySelector('.site-header').offsetHeight || 70;
+                        const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                        const offsetPosition = elementPosition - headerOffset;
+                        
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+                
+                if (mainNav.classList.contains('active')) {
+                    navToggle.click();
+                }
+            });
+        });
+        
+        // Marcar Consulta 
+        const formConsulta = document.getElementById('formConsulta');
+        if (formConsulta) {
+            formConsulta.addEventListener('submit', function(event) {
+                event.preventDefault(); 
+                if (!loggedInUser) {
+                    alert("Por favor, faça login para agendar uma consulta.");
+                    
+                    return;
+                }
+                const confirmacaoDiv = document.getElementById('confirmacaoConsulta');
+                confirmacaoDiv.innerHTML = `<i class="fas fa-check-circle"></i> Consulta agendada com sucesso! Entraremos em contato para confirmação. (Esta é uma mensagem de demonstração)`;
+                confirmacaoDiv.className = 'form-feedback success show';
+                formConsulta.reset();
+                setTimeout(() => {
+                    confirmacaoDiv.className = 'form-feedback success'; 
+                }, 6000);
+            });
+        }
+
+        // Contato Form
+        const formContato = document.getElementById('formContato');
+        if (formContato) {
+            formContato.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Mensagem enviada com sucesso! Entraremos em contato em breve. (Demonstração)');
+                formContato.reset();
+            });
+        }
+
+        // Videochamada
+        const btnVideo = document.getElementById('btnVideo');
+        const videoArea = document.getElementById('videoArea');
+        const videoIframe = videoArea ? videoArea.querySelector('iframe') : null;
+        let jitsiApi = null;
+
+        if (btnVideo && videoArea && videoIframe) {
+            btnVideo.addEventListener('click', () => {
+                 if (!loggedInUser) {
+                    alert("Por favor, faça login para iniciar a videochamada.");
+                    return;
+                }
+                videoArea.style.display = 'block';
+                btnVideo.style.display = 'none';
+                videoIframe.src = videoIframe.dataset.src; 
+            });
+        }
+
+        
+        const patientMessageInput = document.getElementById('patientMessageInput');
+        const sendPatientMessageBtn = document.getElementById('sendPatientMessageBtn');
+        const chatMessagesPatient = document.getElementById('chatMessagesPatient');
+
+        if (patientMessageInput && sendPatientMessageBtn && chatMessagesPatient) {
+            function addPatientMessageToChat(text, type = 'sent-patient') {
+                const messageDiv = document.createElement('div');
+                messageDiv.classList.add('message-bubble-patient', type);
+                
+                const p = document.createElement('p');
+                p.textContent = text;
+                messageDiv.appendChild(p);
+
+                const timestampSpan = document.createElement('span');
+                timestampSpan.classList.add('message-timestamp-patient');
+                timestampSpan.textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                messageDiv.appendChild(timestampSpan);
+
+                chatMessagesPatient.appendChild(messageDiv);
+                chatMessagesPatient.scrollTop = chatMessagesPatient.scrollHeight;
+            }
+
+            sendPatientMessageBtn.addEventListener('click', () => {
+                const messageText = patientMessageInput.value.trim();
+                if (messageText) {
+                    addPatientMessageToChat(messageText, 'sent-patient');
+                    patientMessageInput.value = '';
+                    patientMessageInput.style.height = 'auto'; 
+
+                    
+                    setTimeout(() => {
+                        addPatientMessageToChat("Obrigado por sua mensagem. Responderemos em breve.", 'received-patient');
+                    }, 1500);
+                }
+            });
+
+            patientMessageInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendPatientMessageBtn.click();
+                }
+            });
+             patientMessageInput.addEventListener('input', function() { 
+                this.style.height = 'auto';
+                this.style.height = (this.scrollHeight) + 'px';
+            });
+        }
+         
+        if(chatMessagesPatient){
+            chatMessagesPatient.scrollTop = chatMessagesPatient.scrollHeight;
+        }
+
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,234 @@
+/* === GERAL === */
+:root {
+    --primary-color: #00796B;
+    --secondary-color: #004D40; 
+    --accent-color: #56ab2f; 
+    --text-color: #f4f7f6;
+    --text-light: #f4f7f6;
+    --bg-color: #f4f7f644; 
+    --container-bg: #333;
+    --border-color: #ddd;
+    --error-color: #d9534f;
+    --success-color: #5cb85c;
+
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-color);
+    background: #574f4f;
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+/* === CONTAINER PRINCIPAL PARA LOGIN/REGISTRO/INDEX-1 === */
+.page-container {
+    background-color: var(--container-bg);
+    padding: 30px 40px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    text-align: center;
+    width: 100%;
+    max-width: 450px; 
+}
+
+.index-container { /* Para a página de boas-vindas,*/
+    max-width: 600px;
+}
+
+h1, h2 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+.index-container h1 {
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+}
+.index-container .highlight {
+    color: var(--secondary-color);
+    font-weight: 700;
+}
+
+
+/* === FORMULÁRIOS === */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    text-align: left;
+    margin-bottom: 5px; 
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+}
+
+
+.message {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: var(--border-radius);
+    font-size: 0.9rem;
+    display: none; 
+}
+.message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    display: block; 
+}
+.message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    display: block; 
+}
+
+
+/* === BOTÕES === */
+button[type="submit"],
+.btn {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+button[type="submit"]:hover,
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+.btn-secondary { /* Para links de navegação que parecem botões */
+    background: #f0f0f0;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+.btn-secondary:hover {
+    background: var(--primary-color);
+    color: white;
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+}
+.dash-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px; 
+            height: 100vh; /* Altura total da viewport */
+            background-color: #fff; 
+            z-index: 1000; 
+            display: flex;
+            flex-direction: column;
+        }
+
+       
+        .dash-menu .sidebar {
+            display: flex;
+            flex-direction: column;
+            height: 100%; 
+            width: 100%; 
+        }
+
+        .dash-menu .sidebar .logo {
+            padding: 20px; 
+            flex-shrink: 0; 
+            
+        }
+
+        .dash-menu .sidebar .nav-menu {
+            list-style: none; 
+            padding: 0;
+            margin: 0;
+            overflow-y: auto; 
+            flex-grow: 1; 
+        }
+
+        .main-content {
+            margin-left: 280px; 
+            padding: 20px; 
+           
+        }
+
+/* === LINKS === */
+.mail-box{
+      background: #f0f0f0;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+
+}
+.form-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: block; 
+    margin-top: 10px;
+}
+
+.form-link:hover {
+    text-decoration: underline;
+    color: var(--secondary-color);
+}
+
+/* === RESPONSIVIDADE === */
+@media (max-width: 768px) {
+    .page-container, .index-container {
+        padding: 20px;
+        margin: 10px;
+    }
+
+    h1, h2 {
+        font-size: 1.8rem;
+    }
+    .index-container h1 {
+        font-size: 1.9rem;
+    }
+}

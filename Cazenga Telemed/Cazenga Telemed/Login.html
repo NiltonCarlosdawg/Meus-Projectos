@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Cazenga Telemed</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <main class="page-container">
+        <h2>Login no Cazenga Telemed</h2>
+
+        <form id="loginForm"> <!-- ID alterado para camelCase -->
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Insira o seu email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Palavra-passe:</label>
+                <input type="password" id="password" name="password" minlength="4" maxlength="30" placeholder="Introduza a sua palavra-passe" required>
+            </div>
+            
+            <button type="submit">Entrar</button>
+        </form>
+        <a href="#" class="form-link" style="margin-top: 5px;">Esqueceu a senha?</a>
+    </main>
+
+    <script src="code.js"></script>
+</body>
+</html>

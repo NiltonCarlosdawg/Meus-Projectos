@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Cazenga Telemed</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/code.css">
+</head>
+<body>
+    
+    <div class="container">
+        <section class="dash-menu">
+        <nav class="sidebar">
+            <div class="logo">
+                <h2><i class="fas fa-heartbeat"></i> Cazenga Telemed</h2>
+                <p>Sistema de Gestão Hospitalar</p>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active" data-section="dashboard">
+                        <i class="fas fa-chart-pie"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-section="patients">
+                        <i class="fas fa-users"></i>
+                        <span>Pacientes</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-section="video-call">
+                        <i class="fas fa-video"></i>
+                        <span>Videochamada</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-section="prescriptions">
+                        <i class="fas fa-prescription-bottle-alt"></i>
+                        <span>Receitas</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-section="appointments">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Consultas</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-section="reports">
+                        <i class="fas fa-file-medical-alt"></i>
+                        <span>Relatórios</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-section="messaging"> <i class="fas fa-comments"></i><span>Mensagens</span></a>
+                </li>
+            </ul>
+        </nav>
+        </section>
+
+        <main class="main-content">
+            <header class="header">
+                <div class="welcome">
+                    <h3>Bem-vindo de volta, Dr(a). Nilton</h3>
+                    <p>Hoje é <span id="current-date"></span></p>
+                </div>
+                <div class="user-info">
+                     <a href="#" class="icon-link nav-link" data-section="messaging" title="Mensagens">
+                        <i class="fas fa-comments"></i>
+                    </a>
+                    <div class="avatar">DN</div>
+                    <span>Dr(a). Nilton</span>
+                    
+                    <a href="Login.html" id="logoutButton" class="btn btn-primary">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Sair
+                    </a>
+                </div>
+            </header>
+            
+            <section id="dashboard" class="content-section active">
+                <div class="section-header">
+                    <h2 class="section-title">Dashboard Geral</h2>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-users"></i></div>
+                        <div class="stat-number" id="statTotalPatients">0</div>
+                        <div class="stat-label">Total de Pacientes</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-calendar-check"></i></div>
+                        <div class="stat-number" id="statTodayAppointments">0</div>
+                        <div class="stat-label">Consultas Hoje</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-video"></i></div>
+                        <div class="stat-number" id="statActiveCalls">0</div>
+                        <div class="stat-label">Videochamadas Ativas</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-prescription-bottle-alt"></i></div>
+                        <div class="stat-number" id="statPrescriptionsIssued">0</div>
+                        <div class="stat-label">Receitas Emitidas</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="messaging" class="content-section" style="display: none;">
+                <div class="section-header">
+                    <h2 class="section-title">Caixa de Mensagens</h2>
+                </div>
+
+                <div class="messaging-container">
+                    <aside class="messaging-sidebar">
+                        <div class="messaging-sidebar-header">
+                            <button class="btn btn-primary btn-compose" id="openNewMessageModalBtn">
+                                <i class="fas fa-edit"></i> Nova Mensagem
+                            </button>
+                        </div>
+                        <div class="conversation-search-container">
+                            <i class="fas fa-search search-icon"></i>
+                            <input type="text" class="search-input" id="conversationSearch" placeholder="Buscar conversas...">
+                        </div>
+                        <ul class="conversation-list" id="conversationList">
+                            
+                        </ul>
+                    </aside>
+
+                    <main class="messaging-main-content">
+                        <div id="messagingPlaceholder" class="messaging-placeholder">
+                            <i class="fas fa-comments placeholder-icon"></i>
+                            <p>Selecione uma conversa para visualizar ou inicie uma nova.</p>
+                        </div>
+
+                        <div id="chatView" class="chat-view" style="display: none;">
+                            <header class="chat-header">
+                                <div class="chat-header-patient-info">
+                                    <div class="chat-avatar" id="chatCurrentPatientAvatar"></div>
+                                    <h3 id="chatCurrentPatientName"></h3>
+                                </div>
+                                <div class="chat-header-actions">
+                                    <button class="btn btn-icon" title="Iniciar videochamada"  >
+
+                                        <i class="fas fa-video"></i>
+                                    </button>
+                                    <button class="btn btn-icon" title="Ver perfil do paciente (funcionalidade futura)">
+                                        <i class="fas fa-user-circle"></i>
+                                    </button>
+                                </div>
+                            </header>
+                            <div class="message-display-area" id="messageDisplayArea">
+                                
+                            </div>
+                            <footer class="message-input-area">
+                                <button class="btn btn-icon btn-attach" title="Anexar arquivo">
+                                    <i class="fas fa-paperclip"></i>
+                                    <input type="file" style="display: flex;">
+                                </button>
+                                <textarea id="newMessageText" placeholder="Digite sua mensagem..." rows="1"></textarea>
+                                <button class="btn btn-primary btn-send-message" id="sendMessageBtn">
+                                    <i class="fas fa-paper-plane"></i> Enviar
+                                </button>
+                            </footer>
+                        </div>
+                    </main>
+                </div>
+            </section>
+            
+            <!-- Modal para Nova Mensagem -->
+            <div id="newMessageModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Nova Mensagem</h3>
+                        <button type="button" class="close-modal-btn" aria-label="Fechar modal" data-modal-id="newMessageModal">&times;</button>
+                    </div>
+                    <form id="newMessageForm">
+                        <div class="form-group">
+                            <label class="form-label" for="messagePatientSelect">Para Paciente:</label>
+                            <select class="form-control" id="messagePatientSelect" name="pacienteId" required>
+                                <option value="">Selecione um paciente</option>
+                              
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="initialMessageText">Mensagem:</label>
+                            <textarea class="form-control" id="initialMessageText" name="mensagem" rows="4" required></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-paper-plane"></i> Iniciar Conversa
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <section id="patients" class="content-section" style="display: none;">
+                <div class="section-header">
+                    <h2 class="section-title">Gestão de Pacientes</h2>
+                    <button class="btn btn-primary" id="openPatientModalBtn">
+                        <i class="fas fa-plus"></i>
+                        Novo Paciente
+                    </button>
+                </div>
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" placeholder="Buscar pacientes por nome, ou diagnóstico..." id="patientSearch">
+                </div>
+                <div class="patients-grid" id="patientsGrid">
+                     <p class="patients-grid-empty">Nenhum paciente cadastrado.</p>
+                </div>
+            </section>
+            <section id="video-call" class="content-section" style="display: none;">
+                <div class="section-header">
+                    <h2 class="section-title">Videochamadas</h2>
+                    <button class="btn btn-success" id="startVideoCallBtn">
+                        <i class="fas fa-video"></i>
+                        Iniciar Chamada
+                    </button>
+                </div>
+                <div class="video-call-container">
+                    <div class="video-placeholder" id="videoContainer">
+                        <i class="fas fa-video video-placeholder-icon"></i>
+                         <iframe src="https://meet.jit.si/CazengaTelemedMeetingRoom" style="display:none;" width="100%" height="450" allow="camera; microphone; display-capture; autoplay; clipboard-write" allowfullscreen></iframe>
+                        <span class="video-placeholder-text">Clique em "Iniciar Chamada" para começar</span>
+                    </div>
+                    <div class="call-controls" id="callControls" style="display: none;">
+                        <button class="call-btn mute" id="toggleMuteBtn" aria-label="Ativar/Desativar microfone">
+                            <i class="fas fa-microphone" id="muteIcon"></i>
+                        </button>
+                        <button class="call-btn video" id="toggleVideoBtn" aria-label="Ativar/Desativar vídeo">
+                            <i class="fas fa-video" id="videoIcon"></i>
+                        </button>
+                        <button class="call-btn end" id="endCallBtn" aria-label="Encerrar chamada">
+                            <i class="fas fa-phone-slash"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+            <section id="prescriptions" class="content-section" style="display: none;">
+                <div class="section-header">
+                    <h2 class="section-title">Receitas Médicas</h2>
+                    <button class="btn btn-primary" id="openPrescriptionModalBtn">
+                        <i class="fas fa-plus"></i>
+                        Nova Receita
+                    </button>
+                </div>
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" placeholder="Buscar receitas por paciente ou medicamento..." id="prescriptionSearch">
+                </div>
+                <div id="prescriptionsListContainer">
+                     <p class="patients-grid-empty">Nenhuma receita encontrada.</p>
+                </div>
+            </section>
+            <section id="appointments" class="content-section" style="display: none;">
+                <div class="section-header">
+                    <h2 class="section-title">Agenda de Consultas</h2>
+                    <button class="btn btn-primary" id="openAppointmentModalBtn">
+                        <i class="fas fa-plus"></i>
+                        Nova Consulta
+                    </button>
+                </div>
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" placeholder="Buscar consultas por paciente ou data..." id="appointmentSearch">
+                </div>
+                 <div id="appointmentsListContainer">
+                    <p class="patients-grid-empty">Nenhuma consulta agendada.</p>
+                </div>
+            </section>
+            <section id="reports" class="content-section" style="display: none;">
+                <div class="section-header">
+                    <h2 class="section-title">Relatórios</h2>
+                    <button class="btn btn-primary" id="generateReportBtn">
+                        <i class="fas fa-file-pdf"></i>
+                        Gerar Relatório
+                    </button>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="reportType">Tipo de Relatório</label>
+                        <select class="form-control" id="reportType">
+                            <option value="patients">Relatório de Pacientes</option>
+                            <option value="appointments">Relatório de Consultas</option>
+                            <option value="prescriptions">Relatório de Receitas</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="reportPeriod">Período</label>
+                        <select class="form-control" id="reportPeriod">
+                            <option value="all">Todos</option>
+                            <option value="last_week">Última semana</option>
+                            <option value="last_month">Último mês</option>
+                        </select>
+                    </div>
+                </div>
+                 <div id="reportOutput" class="patients-grid-empty">
+                    Selecione as opções e clique em "Gerar Relatório".
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Paciente Modal -->
+    <div id="patientModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="patientModalTitle">Cadastro de Paciente</h3>
+                <button type="button" class="close-modal-btn" aria-label="Fechar modal" data-modal-id="patientModal">&times;</button>
+            </div>
+            <form id="patientForm">
+                <input type="hidden" name="id" id="patientIdInput">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="patientNameInput">Nome Completo</label>
+                        <input type="text" class="form-control" id="patientNameInput" name="nome" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="patientDobInput">Data de Nascimento</label>
+                        <input type="date" class="form-control" id="patientDobInput" name="nascimento" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="patientPhoneInput">Telefone</label>
+                        <input type="tel" class="form-control" id="patientPhoneInput" name="telefone" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="patientEmailInput">Email</label>
+                    <input type="email" class="form-control" id="patientEmailInput" name="email">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="patientDiagnosisInput">Diagnóstico Principal</label>
+                    <input type="text" class="form-control" id="patientDiagnosisInput" name="diagnostico">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="patientHistoryInput">Histórico Médico</label>
+                    <textarea class="form-control" id="patientHistoryInput" name="historico" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="patientFileInput">Anexar Arquivo (Exames, etc.)</label>
+                    <input type="file" class="form-control" id="patientFileInput" name="arquivo">
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i>
+                    Salvar Paciente
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div id="prescriptionModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="prescriptionModalTitle">Nova Receita Médica</h3>
+                <button type="button" class="close-modal-btn" aria-label="Fechar modal" data-modal-id="prescriptionModal">&times;</button>
+            </div>
+            <form id="prescriptionForm">
+                <input type="hidden" name="id" id="prescriptionIdInput">
+                <div class="form-group">
+                    <label class="form-label" for="prescriptionPatientSelect">Paciente</label>
+                    <select class="form-control" id="prescriptionPatientSelect" name="pacienteId" required>
+                        <option value="">Selecione um paciente</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="prescriptionMedicationInput">Medicamento</label>
+                        <input type="text" class="form-control" id="prescriptionMedicationInput" name="medicamento" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="prescriptionDosageInput">Dosagem</label>
+                        <input type="text" class="form-control" id="prescriptionDosageInput" name="dosagem" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="prescriptionFrequencyInput">Frequência</label>
+                        <input type="text" class="form-control" id="prescriptionFrequencyInput" name="frequencia" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="prescriptionDurationInput">Duração</label>
+                        <input type="text" class="form-control" id="prescriptionDurationInput" name="duracao" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="prescriptionObservationsInput">Observações</label>
+                    <textarea class="form-control" id="prescriptionObservationsInput" name="observacoes" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-prescription-bottle-alt"></i>
+                    Gerar Receita
+                </button>
+            </form>
+        </div>
+    </div>
+    <div id="appointmentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="appointmentModalTitle">Agendar Consulta</h3>
+                <button type="button" class="close-modal-btn" aria-label="Fechar modal" data-modal-id="appointmentModal">&times;</button>
+            </div>
+            <form id="appointmentForm">
+                <input type="hidden" name="id" id="appointmentIdInput">
+                <div class="form-group">
+                    <label class="form-label" for="appointmentPatientSelect">Paciente</label>
+                    <select class="form-control" id="appointmentPatientSelect" name="pacienteId" required>
+                        <option value="">Selecione um paciente</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="appointmentDateInput">Data</label>
+                        <input type="date" class="form-control" id="appointmentDateInput" name="data" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="appointmentTimeInput">Horário</label>
+                        <input type="time" class="form-control" id="appointmentTimeInput" name="horario" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="appointmentTypeSelect">Tipo de Consulta</label>
+                    <select class="form-control" id="appointmentTypeSelect" name="tipo" required>
+                        <option value="">Selecione o tipo</option>
+                        <option value="presencial">Presencial</option>
+                        <option value="telemedicina">Telemedicina</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="appointmentObservationsInput">Observações</label>
+                    <textarea class="form-control" id="appointmentObservationsInput" name="observacoes" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-calendar-plus"></i>
+                    Agendar Consulta
+                </button> 
+            </form>
+        </div>
+    </div>
+
+    <div id="toastNotification" class="toast"></div>
+
+    <script>
+    (function() {
+        const currentDoctorId = 0;
+
+        let db = {
+            patients: [
+                
+            ],
+            prescriptions: [
+               
+            ],
+            appointments: [
+               
+            ],
+            conversations: [ 
+                { id: 0, patientId: 0, lastMessageTimestamp: new Date(Date.now() - 3600000).toISOString(), unreadCount: 1 }, // 1 hour ago
+                { id: 1, patientId: 1, lastMessageTimestamp: new Date(Date.now() - 86400000).toISOString(), unreadCount: 0 }  // 1 day ago
+            ],
+            messages: [ 
+            ],
+            nextId: { 
+                patients: 2,
+                prescriptions: 1,
+                appointments: 2,
+                conversations: 2, 
+                messages: 4       
+            }
+        };
+
+        let currentCallActive = false;
+        let isMuted = false;
+        let isVideoOn = true;
+        let currentOpenModal = null; 
+        let activeConversationId = null; 
+
+    
+        const patientModal = document.getElementById('patientModal');
+        const patientForm = document.getElementById('patientForm');
+        const patientGrid = document.getElementById('patientsGrid');
+        const patientSearchInput = document.getElementById('patientSearch');
+
+        const prescriptionModal = document.getElementById('prescriptionModal');
+        const prescriptionForm = document.getElementById('prescriptionForm');
+        const prescriptionsListContainer = document.getElementById('prescriptionsListContainer');
+        const prescriptionSearchInput = document.getElementById('prescriptionSearch');
+
+        const appointmentModal = document.getElementById('appointmentModal');
+        const appointmentForm = document.getElementById('appointmentForm');
+        const appointmentsListContainer = document.getElementById('appointmentsListContainer');
+        const appointmentSearchInput = document.getElementById('appointmentSearch');
+
+        
+        const conversationListEl = document.getElementById('conversationList');
+        const conversationSearchInput = document.getElementById('conversationSearch');
+        const messagingPlaceholderEl = document.getElementById('messagingPlaceholder');
+        const chatViewEl = document.getElementById('chatView');
+        const chatCurrentPatientAvatarEl = document.getElementById('chatCurrentPatientAvatar');
+        const chatCurrentPatientNameEl = document.getElementById('chatCurrentPatientName');
+        const messageDisplayAreaEl = document.getElementById('messageDisplayArea');
+        const newMessageTextEl = document.getElementById('newMessageText');
+        const sendMessageBtn = document.getElementById('sendMessageBtn');
+        const openNewMessageModalBtn = document.getElementById('openNewMessageModalBtn');
+        const newMessageModal = document.getElementById('newMessageModal');
+        const newMessageForm = document.getElementById('newMessageForm');
+        const messagePatientSelect = document.getElementById('messagePatientSelect');
+        const initialMessageText = document.getElementById('initialMessageText');
+
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCurrentDate();
+            setupNavigation();
+            setupModalOpeners();
+            setupModalClosers();
+            setupFormSubmissions();
+            setupSearchInputs();
+            
+            renderPatients();
+            renderPrescriptions();
+            renderAppointments();
+            updateDashboardStats();
+            
+            renderConversationsList(); 
+
+            document.getElementById('logoutButton').addEventListener('click', (e) => {
+                e.preventDefault();
+                showToast('Sessão encerrada. Redirecionando...', 'success');
+                setTimeout(() => { window.location.href = "login.html"; }, 1500);
+            });
+
+            document.getElementById('startVideoCallBtn').addEventListener('click', startVideoCall);
+            document.getElementById('toggleMuteBtn').addEventListener('click', toggleMute);
+            document.getElementById('toggleVideoBtn').addEventListener('click', toggleVideo);
+            document.getElementById('endCallBtn').addEventListener('click', endCall);
+            document.getElementById('generateReportBtn').addEventListener('click', generateReport);
+
+            
+            conversationListEl.addEventListener('click', handleConversationSelect);
+            sendMessageBtn.addEventListener('click', sendMessageToConversation);
+            newMessageTextEl.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessageToConversation();
+                }
+            });
+            openNewMessageModalBtn.addEventListener('click', () => {
+                newMessageForm.reset();
+                populatePatientSelectForNewMessage();
+                openModal('newMessageModal');
+            });
+            newMessageForm.addEventListener('submit', handleNewMessageFormSubmit);
+            conversationSearchInput.addEventListener('input', (e) => renderConversationsList(e.target.value));
+
+             // Auto ajuste da caixa de mensagem
+            newMessageTextEl.addEventListener('input', function() {
+                this.style.height = 'auto';
+                this.style.height = (this.scrollHeight) + 'px';
+            });
+        });
+
+        // --- Funções Utilitárias ---
+        function getCurrentISODate() {
+            return new Date().toISOString().split('T')[0];
+        }
+        function getCurrentISOTimestamp() {
+            return new Date().toISOString();
+        }
+
+        function sanitizeHTML(str) {
+            if (str === null || typeof str === 'undefined') return '';
+            const temp = document.createElement('div');
+            temp.textContent = str;
+            return temp.innerHTML;
+        }
+        
+        function getInitials(name) { 
+            if (!name || typeof name !== 'string') return '??';
+            const parts = name.split(' ');
+            if (parts.length === 1) return parts[0].substring(0, 2).toUpperCase();
+            return (parts[0][0] + (parts[parts.length - 1][0] || '')).toUpperCase();
+        }
+
+
+        function showToast(message, type = 'info', duration = 3000) {
+            const toast = document.getElementById('toastNotification');
+            toast.textContent = message;
+            toast.className = 'toast show';
+            if (type === 'success') toast.classList.add('success');
+            else if (type === 'error') toast.classList.add('error');
+
+            setTimeout(() => {
+                toast.className = 'toast';
+            }, duration);
+        }
+        
+        function loadCurrentDate() {
+            const now = new Date();
+            const options = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
+            document.getElementById('current-date').textContent = now.toLocaleDateString('pt-BR', options);
+        }
+
+        // --- Navegação ---
+        function setupNavigation() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const contentSections = document.querySelectorAll('.content-section');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    
+                    // Activate current link and corresponding sidebar item if it's a header icon
+                    this.classList.add('active');
+                    const sectionId = this.dataset.section;
+                    const sidebarLink = document.querySelector(`.sidebar .nav-link[data-section="${sectionId}"]`);
+                    if (sidebarLink) sidebarLink.classList.add('active');
+
+
+                    contentSections.forEach(section => {
+                        if (section.id === sectionId) {
+                            section.classList.add('active');
+                             section.style.display = 'block'; 
+                        } else {
+                            section.classList.remove('active');
+                             section.style.display = 'none'; 
+                        }
+                    });
+                    if (sectionId === 'messaging') { 
+                        if (!activeConversationId && db.conversations.length > 0) {
+                            
+                        }
+                    }
+                });
+            });
+            const initialSection = document.getElementById('dashboard');
+            if (initialSection) {
+                initialSection.classList.add('active');
+                initialSection.style.display = 'block';
+            }
+            const initialLink = document.querySelector('.nav-link[data-section="dashboard"]');
+            if (initialLink) {
+                initialLink.classList.add('active');
+            }
+        }
+
+        // --- Modais ---
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (!modal) return;
+            modal.style.display = 'flex';
+            currentOpenModal = modal;
+            document.addEventListener('keydown', handleEscKey);
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'none';
+            }
+            if (currentOpenModal && currentOpenModal.id === modalId) {
+                currentOpenModal = null;
+            }
+            document.removeEventListener('keydown', handleEscKey);
+        }
+
+        function handleEscKey(event) {
+            if (event.key === 'Escape' && currentOpenModal) {
+                closeModal(currentOpenModal.id);
+            }
+        }
+
+        function setupModalOpeners() {
+            document.getElementById('openPatientModalBtn').addEventListener('click', () => {
+                patientForm.reset();
+                document.getElementById('patientIdInput').value = ''; 
+                document.getElementById('patientModalTitle').textContent = 'Cadastro de Paciente';
+                openModal('patientModal');
+            });
+            document.getElementById('openPrescriptionModalBtn').addEventListener('click', () => {
+                prescriptionForm.reset();
+                document.getElementById('prescriptionIdInput').value = '';
+                document.getElementById('prescriptionModalTitle').textContent = 'Nova Receita Médica';
+                populatePatientSelects(document.getElementById('prescriptionPatientSelect'));
+                openModal('prescriptionModal');
+            });
+            document.getElementById('openAppointmentModalBtn').addEventListener('click', () => {
+                appointmentForm.reset();
+                document.getElementById('appointmentIdInput').value = '';
+                document.getElementById('appointmentModalTitle').textContent = 'Agendar Consulta';
+                populatePatientSelects(document.getElementById('appointmentPatientSelect'));
+                openModal('appointmentModal');
+            });
+        }
+
+        function setupModalClosers() {
+            document.querySelectorAll('.close-modal-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    closeModal(this.dataset.modalId);
+                });
+            });
+            document.querySelectorAll('.modal').forEach(modalContainer => {
+                modalContainer.addEventListener('click', function(event) {
+                    if (event.target === this) { 
+                        closeModal(this.id);
+                    }
+                });
+            });
+        }
+        
+        function populatePatientSelects(selectElement) {
+            if (!selectElement) return;
+            const currentValue = selectElement.value; 
+            const firstOptionHTML = selectElement.options[0] ? selectElement.options[0].outerHTML : '<option value="">Selecione um paciente</option>';
+            selectElement.innerHTML = firstOptionHTML;
+
+            db.patients.sort((a, b) => a.nome.localeCompare(b.nome)).forEach(patient => {
+                const option = document.createElement('option');
+                option.value = patient.id;
+                option.textContent = sanitizeHTML(patient.nome);
+                selectElement.appendChild(option);
+            });
+            selectElement.value = currentValue; 
+        }
+
+        // --- CRUD e Renderização: Pacientes ---
+        function renderPatients(filterTerm = '') {
+            patientGrid.innerHTML = ''; 
+            const searchTerm = filterTerm.toLowerCase();
+
+            const filteredPatients = db.patients.filter(patient =>
+                patient.nome.toLowerCase().includes(searchTerm) ||
+                (patient.diagnostico && patient.diagnostico.toLowerCase().includes(searchTerm))
+            );
+
+            if (filteredPatients.length === 0) {
+                patientGrid.innerHTML = '<p class="patients-grid-empty">Nenhum paciente encontrado.</p>';
+                return;
+            }
+
+            filteredPatients.forEach(patient => {
+                const card = document.createElement('div');
+                card.className = 'patient-card';
+                card.dataset.patientId = patient.id;
+                card.innerHTML = `
+                    <div class="patient-header">
+                        <span class="patient-name">${sanitizeHTML(patient.nome)}</span>
+                        <span class="patient-status status-${patient.status === 'active' || patient.status === 'activo' ? 'active' : 'pending'}">
+                            ${patient.status === 'active' || patient.status === 'activo' ? 'Ativo' : 'Pendente'}
+                        </span>
+                    </div>
+                    <div class="patient-info">
+                        <p><strong>Telefone:</strong> ${sanitizeHTML(patient.telefone)}</p>
+                        <p><strong>Diagnóstico:</strong> ${sanitizeHTML(patient.diagnostico || 'N/A')}</p>
+                    </div>
+                    <div class="patient-actions">
+                        <button class="btn btn-sm btn-primary btn-edit-patient"><i class="fas fa-edit"></i> Editar</button>
+                        <button class="btn btn-sm btn-danger btn-delete-patient"><i class="fas fa-trash"></i> Excluir</button>
+                    </div>
+                `;
+                patientGrid.appendChild(card);
+            });
+            attachPatientActionListeners();
+        }
+
+        function attachPatientActionListeners() {
+            document.querySelectorAll('.btn-edit-patient').forEach(button => {
+                button.addEventListener('click', function() {
+                    const patientId = parseInt(this.closest('.patient-card').dataset.patientId);
+                    const patient = db.patients.find(p => p.id === patientId);
+                    if (patient) {
+                        patientForm.reset(); 
+                        document.getElementById('patientIdInput').value = patient.id;
+                        document.getElementById('patientNameInput').value = patient.nome;
+                        document.getElementById('patientDobInput').value = patient.nascimento;
+                        document.getElementById('patientPhoneInput').value = patient.telefone;
+                        document.getElementById('patientEmailInput').value = patient.email || '';
+                        document.getElementById('patientDiagnosisInput').value = patient.diagnostico || '';
+                        document.getElementById('patientHistoryInput').value = patient.historico || '';
+                        document.getElementById('patientModalTitle').textContent = 'Editar Paciente';
+                        openModal('patientModal');
+                    }
+                });
+            });
+
+            document.querySelectorAll('.btn-delete-patient').forEach(button => {
+                button.addEventListener('click', function() {
+                    const patientId = parseInt(this.closest('.patient-card').dataset.patientId);
+                    const patient = db.patients.find(p => p.id === patientId);
+                    if (patient && confirm(`Tem certeza que deseja excluir ${patient.nome}? Esta ação também removerá receitas, consultas e conversas associadas.`)) {
+                        db.prescriptions = db.prescriptions.filter(presc => presc.pacienteId !== patientId);
+                        db.appointments = db.appointments.filter(appt => appt.pacienteId !== patientId);
+                        db.conversations = db.conversations.filter(conv => conv.patientId !== patientId);
+                        db.messages = db.messages.filter(msg => { 
+                            const convExists = db.conversations.find(c => c.id === msg.conversationId);
+                            return !!convExists;
+                        });
+                        
+                        db.patients = db.patients.filter(p => p.id !== patientId);
+                        
+                        renderPatients(patientSearchInput.value);
+                        renderPrescriptions(prescriptionSearchInput.value); 
+                        renderAppointments(appointmentSearchInput.value); 
+                        renderConversationsList(conversationSearchInput.value); 
+                        if (activeConversationId && !db.conversations.find(c => c.id === activeConversationId)) {
+                            clearChatView(); 
+                        }
+                        updateDashboardStats();
+                        populatePatientSelects(document.getElementById('prescriptionPatientSelect'));
+                        populatePatientSelects(document.getElementById('appointmentPatientSelect'));
+                        populatePatientSelectForNewMessage(); 
+                        showToast('Paciente excluído com sucesso!', 'success');
+                    }
+                });
+            });
+        }
+        
+        function handlePatientFormSubmit(e) {
+            e.preventDefault();
+            const formData = new FormData(patientForm);
+            const patientData = Object.fromEntries(formData.entries());
+            const patientId = parseInt(patientData.id);
+
+            if (patientId || patientId === 0) { 
+                const index = db.patients.findIndex(p => p.id === patientId);
+                if (index > -1) {
+                    db.patients[index] = { ...db.patients[index], ...patientData, id: patientId, status: db.patients[index].status || 'active' }; 
+                    showToast('Paciente atualizado com sucesso!', 'success');
+                }
+            } else { 
+                patientData.id = db.nextId.patients++;
+                patientData.status = 'active'; 
+                db.patients.push(patientData);
+                showToast('Paciente cadastrado com sucesso!', 'success');
+            }
+            patientForm.reset();
+            closeModal('patientModal');
+            renderPatients(patientSearchInput.value);
+            updateDashboardStats();
+            populatePatientSelects(document.getElementById('prescriptionPatientSelect'));
+            populatePatientSelects(document.getElementById('appointmentPatientSelect'));
+            populatePatientSelectForNewMessage(); // Atualiz os pacientes para a lista de mensagens
+            renderConversationsList(); 
+        }
+
+        // --- Renderização: Receitas ---
+        function renderPrescriptions(filterTerm = '') {
+            prescriptionsListContainer.innerHTML = '';
+            const searchTerm = filterTerm.toLowerCase();
+
+            const filteredPrescriptions = db.prescriptions.filter(presc => {
+                const patient = db.patients.find(p => p.id === presc.pacienteId);
+                const patientName = patient ? patient.nome.toLowerCase() : '';
+                return patientName.includes(searchTerm) || presc.medicamento.toLowerCase().includes(searchTerm);
+            });
+
+            if (filteredPrescriptions.length === 0) {
+                prescriptionsListContainer.innerHTML = '<p class="patients-grid-empty">Nenhuma receita encontrada.</p>';
+                return;
+            }
+
+            const grid = document.createElement('div');
+            grid.className = 'patients-grid'; 
+            filteredPrescriptions.sort((a,b) => new Date(b.dataEmissao) - new Date(a.dataEmissao)).forEach(presc => {
+                const patient = db.patients.find(p => p.id === presc.pacienteId);
+                const card = document.createElement('div');
+                card.className = 'patient-card'; 
+                card.dataset.prescriptionId = presc.id;
+                card.innerHTML = `
+                    <div class="patient-header">
+                        <span class="patient-name">Medicamento: ${sanitizeHTML(presc.medicamento)}</span>
+                        <span class="patient-status status-active">Emitida</span>
+                    </div>
+                    <div class="patient-info">
+                        <p><strong>Paciente:</strong> ${sanitizeHTML(patient ? patient.nome : 'Desconhecido')}</p>
+                        <p><strong>Dosagem:</strong> ${sanitizeHTML(presc.dosagem)}</p>
+                        <p><strong>Frequência:</strong> ${sanitizeHTML(presc.frequencia)}</p>
+                        <p><strong>Duração:</strong> ${sanitizeHTML(presc.duracao)}</p>
+                        <p><strong>Data Emissão:</strong> ${new Date(presc.dataEmissao).toLocaleDateString('pt-BR')}</p>
+                        ${presc.observacoes ? `<p><strong>Obs:</strong> ${sanitizeHTML(presc.observacoes)}</p>` : ''}
+                    </div>
+                    <div class="patient-actions">
+                        <button class="btn btn-sm btn-primary btn-edit-prescription"><i class="fas fa-edit"></i> Editar</button>
+                        <button class="btn btn-sm btn-danger btn-delete-prescription"><i class="fas fa-trash"></i> Excluir</button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+            prescriptionsListContainer.appendChild(grid);
+            attachPrescriptionActionListeners();
+        }
+        
+        function attachPrescriptionActionListeners() {
+            document.querySelectorAll('.btn-edit-prescription').forEach(button => {
+                button.addEventListener('click', function() {
+                    const presId = parseInt(this.closest('.patient-card').dataset.prescriptionId);
+                    const prescription = db.prescriptions.find(p => p.id === presId);
+                    if (prescription) {
+                        prescriptionForm.reset();
+                        populatePatientSelects(document.getElementById('prescriptionPatientSelect'));
+                        document.getElementById('prescriptionIdInput').value = prescription.id;
+                        document.getElementById('prescriptionPatientSelect').value = prescription.pacienteId;
+                        document.getElementById('prescriptionMedicationInput').value = prescription.medicamento;
+                        document.getElementById('prescriptionDosageInput').value = prescription.dosagem;
+                        document.getElementById('prescriptionFrequencyInput').value = prescription.frequencia;
+                        document.getElementById('prescriptionDurationInput').value = prescription.duracao;
+                        document.getElementById('prescriptionObservationsInput').value = prescription.observacoes || '';
+                        document.getElementById('prescriptionModalTitle').textContent = 'Editar Receita';
+                        openModal('prescriptionModal');
+                    }
+                });
+            });
+
+            document.querySelectorAll('.btn-delete-prescription').forEach(button => {
+                button.addEventListener('click', function() {
+                    const presId = parseInt(this.closest('.patient-card').dataset.prescriptionId);
+                    if (confirm(`Tem certeza que deseja excluir esta receita?`)) {
+                        db.prescriptions = db.prescriptions.filter(p => p.id !== presId);
+                        renderPrescriptions(prescriptionSearchInput.value);
+                        updateDashboardStats();
+                        showToast('Receita excluída com sucesso!', 'success');
+                    }
+                });
+            });
+        }
+
+        function handlePrescriptionFormSubmit(e) {
+            e.preventDefault();
+            const formData = new FormData(prescriptionForm);
+            const presData = Object.fromEntries(formData.entries());
+            presData.pacienteId = parseInt(presData.pacienteId);
+            const presId = parseInt(presData.id);
+
+            if (isNaN(presData.pacienteId)) {
+                showToast('Selecione um paciente.', 'error');
+                return;
+            }
+
+            if (presId || presId === 0) { 
+                const index = db.prescriptions.findIndex(p => p.id === presId);
+                if (index > -1) {
+                    const originalPrescription = db.prescriptions[index];
+                    db.prescriptions[index] = { ...originalPrescription, ...presData, id: presId };
+                    showToast('Receita atualizada com sucesso!', 'success');
+                }
+            } else { 
+                presData.id = db.nextId.prescriptions++;
+                presData.dataEmissao = getCurrentISODate(); 
+                db.prescriptions.push(presData);
+                showToast('Receita gerada com sucesso!', 'success');
+            }
+            prescriptionForm.reset();
+            closeModal('prescriptionModal');
+            renderPrescriptions(prescriptionSearchInput.value);
+            updateDashboardStats();
+        }
+
+
+        // --Renderização: Consultas ---
+        function renderAppointments(filterTerm = '') {
+            appointmentsListContainer.innerHTML = '';
+            const searchTerm = filterTerm.toLowerCase();
+            const todayStr = getCurrentISODate();
+
+            const filteredAppointments = db.appointments.filter(appt => {
+                const patient = db.patients.find(p => p.id === appt.pacienteId);
+                const patientName = patient ? patient.nome.toLowerCase() : '';
+                return patientName.includes(searchTerm) || appt.data.includes(searchTerm);
+            });
+
+            if (filteredAppointments.length === 0) {
+                appointmentsListContainer.innerHTML = '<p class="patients-grid-empty">Nenhuma consulta encontrada.</p>';
+                return;
+            }
+            
+            const grid = document.createElement('div');
+            grid.className = 'patients-grid'; 
+            filteredAppointments.sort((a, b) => {
+                const dateA = new Date(`${a.data}T${a.horario}`);
+                const dateB = new Date(`${b.data}T${b.horario}`);
+                return dateB - dateA; 
+            }).forEach(appt => {
+                const patient = db.patients.find(p => p.id === appt.pacienteId);
+                const card = document.createElement('div');
+                card.className = 'patient-card';
+                card.dataset.appointmentId = appt.id;
+                let statusClass = 'status-pending';
+                let statusText = 'Agendada';
+                if (appt.data < todayStr) {
+                    statusClass = 'status-realizada'; 
+                    statusText = 'Realizada';
+                } else if (appt.data === todayStr) {
+                    statusClass = 'status-hoje'; 
+                    statusText = 'Hoje';
+                }
+
+                card.innerHTML = `
+                    <div class="patient-header">
+                        <span class="patient-name">Consulta: ${new Date(appt.data).toLocaleDateString('pt-BR')} às ${appt.horario}</span>
+                        <span class="patient-status ${statusClass}">${statusText}</span>
+                    </div>
+                    <div class="patient-info">
+                        <p><strong>Paciente:</strong> ${sanitizeHTML(patient ? patient.nome : 'Desconhecido')}</p>
+                        <p><strong>Tipo:</strong> ${sanitizeHTML(appt.tipo.charAt(0).toUpperCase() + appt.tipo.slice(1))}</p>
+                        ${appt.observacoes ? `<p><strong>Obs:</strong> ${sanitizeHTML(appt.observacoes)}</p>` : ''}
+                    </div>
+                    <div class="patient-actions">
+                        <button class="btn btn-sm btn-primary btn-edit-appointment"><i class="fas fa-edit"></i> Editar</button>
+                        <button class="btn btn-sm btn-danger btn-delete-appointment"><i class="fas fa-trash"></i> Cancelar</button>
+                    </div> 
+                `;
+                grid.appendChild(card);
+            });
+            appointmentsListContainer.appendChild(grid);
+            attachAppointmentActionListeners();
+        }
+
+        function attachAppointmentActionListeners() {
+             document.querySelectorAll('.btn-edit-appointment').forEach(button => {
+                button.addEventListener('click', function() {
+                    const apptId = parseInt(this.closest('.patient-card').dataset.appointmentId);
+                    const appointment = db.appointments.find(a => a.id === apptId);
+                    if (appointment) {
+                        appointmentForm.reset();
+                        populatePatientSelects(document.getElementById('appointmentPatientSelect'));
+                        document.getElementById('appointmentIdInput').value = appointment.id;
+                        document.getElementById('appointmentPatientSelect').value = appointment.pacienteId;
+                        document.getElementById('appointmentDateInput').value = appointment.data;
+                        document.getElementById('appointmentTimeInput').value = appointment.horario;
+                        document.getElementById('appointmentTypeSelect').value = appointment.tipo;
+                        document.getElementById('appointmentObservationsInput').value = appointment.observacoes || '';
+                        document.getElementById('appointmentModalTitle').textContent = 'Editar Consulta';
+                        openModal('appointmentModal');
+                    }
+                });
+            });
+
+            document.querySelectorAll('.btn-delete-appointment').forEach(button => {
+                button.addEventListener('click', function() {
+                    const apptId = parseInt(this.closest('.patient-card').dataset.appointmentId);
+                    if (confirm(`Tem certeza que deseja cancelar esta consulta?`)) {
+                        db.appointments = db.appointments.filter(a => a.id !== apptId);
+                        renderAppointments(appointmentSearchInput.value);
+                        updateDashboardStats();
+                        showToast('Consulta cancelada com sucesso!', 'success');
+                    }
+                });
+            });
+        }
+
+        function handleAppointmentFormSubmit(e) {
+            e.preventDefault();
+            const formData = new FormData(appointmentForm);
+            const apptData = Object.fromEntries(formData.entries());
+            apptData.pacienteId = parseInt(apptData.pacienteId);
+            const apptId = parseInt(apptData.id);
+
+            if (isNaN(apptData.pacienteId)) {
+                showToast('Selecione um paciente.', 'error');
+                return;
+            }
+            if (!apptId && (new Date(apptData.data + 'T' + apptData.horario) < new Date(new Date().toDateString()))) { 
+                showToast('Não é possível agendar consultas para datas/horários passados.', 'error');
+                return;
+            }
+
+            if (apptId || apptId === 0) { 
+                const index = db.appointments.findIndex(a => a.id === apptId);
+                if (index > -1) {
+                    db.appointments[index] = { ...db.appointments[index], ...apptData, id: apptId };
+                    showToast('Consulta atualizada com sucesso!', 'success');
+                }
+            } else { 
+                apptData.id = db.nextId.appointments++;
+                db.appointments.push(apptData);
+                showToast('Consulta agendada com sucesso!', 'success');
+            }
+            appointmentForm.reset();
+            closeModal('appointmentModal');
+            renderAppointments(appointmentSearchInput.value);
+            updateDashboardStats();
+        }
+        
+        function setupFormSubmissions() {
+            patientForm.addEventListener('submit', handlePatientFormSubmit);
+            prescriptionForm.addEventListener('submit', handlePrescriptionFormSubmit);
+            appointmentForm.addEventListener('submit', handleAppointmentFormSubmit);
+        }
+
+        function setupSearchInputs() {
+            patientSearchInput.addEventListener('input', (e) => renderPatients(e.target.value));
+            prescriptionSearchInput.addEventListener('input', (e) => renderPrescriptions(e.target.value));
+            appointmentSearchInput.addEventListener('input', (e) => renderAppointments(e.target.value));
+        }
+        
+        function updateDashboardStats() {
+            document.getElementById('statTotalPatients').textContent = db.patients.length;
+            const today = getCurrentISODate();
+            document.getElementById('statTodayAppointments').textContent = db.appointments.filter(a => a.data === today).length;
+            document.getElementById('statPrescriptionsIssued').textContent = db.prescriptions.length;
+            document.getElementById('statActiveCalls').textContent = currentCallActive ? '1' : '0';
+        }
+
+        // --- Videochamada (Jitsi Integração) ---
+        let jitsiApi = null;
+
+        function startVideoCall() {
+            if (currentCallActive) {
+                showToast('Já existe uma chamada ativa.', 'info');
+                return;
+            }
+            const domain = 'meet.jit.si';
+            const roomName = 'CazengaTelemedMeetingRoom-' + Date.now(); 
+            const options = {
+                roomName: roomName,
+                width: '100%',
+                height: '100%', 
+                parentNode: document.querySelector('#video-call iframe').parentNode, 
+                interfaceConfigOverwrite: {
+                    TOOLBAR_BUTTONS: [
+                        'microphone', 'camera', 'closedcaptions', 'desktop', 'fullscreen',
+                        'fodeviceselection', 'hangup', 'profile', 'chat', 'etherpad',
+                        'sharedvideo', 'settings', 'raisehand', 'videoquality', 'filmstrip',
+                         'tileview', 
+                    ],
+                    SETTINGS_SECTIONS: [ 'devices', 'language', 'moderator', 'profile', 'sounds' ],
+                    SHOW_JITSI_WATERMARK: false,
+                    SHOW_WATERMARK_FOR_GUESTS: false,
+                    APP_NAME: 'Cazenga Telemed',
+                    PROVIDER_NAME: 'Cazenga',
+                },
+                configOverwrite: {
+                    startWithAudioMuted: false,
+                    startWithVideoMuted: false,
+                    prejoinPageEnabled: false, 
+                },
+                
+                elementAttributes: { id: 'jitsiConferenceFrame' }
+            };
+
+            
+            if (jitsiApi) {
+                jitsiApi.dispose();
+                jitsiApi = null;
+            }
+            const videoIframe = document.querySelector('#video-call iframe');
+            videoIframe.style.display = 'none'; 
+
+            jitsiApi = new JitsiMeetExternalAPI(domain, options);
+            
+            
+            jitsiApi.addEventListener('videoConferenceJoined', () => {
+                currentCallActive = true;
+                document.querySelector('#video-call .video-placeholder-icon').style.display = 'none';
+                document.querySelector('#video-call .video-placeholder-text').textContent = 'Videochamada em andamento...';
+                document.getElementById('callControls').style.display = 'flex'; 
+                updateDashboardStats();
+                showToast('Videochamada iniciada.', 'success');
+                jitsiApi.executeCommand('displayName', 'Dr(a). Nilton');
+            });
+
+            jitsiApi.addEventListener('videoConferenceLeft', () => {
+                endCallCleanup(); 
+            });
+            
+        }
+        
+        function endCallCleanup() {
+            if (!currentCallActive && !jitsiApi) return; 
+
+            currentCallActive = false;
+            isMuted = false;
+            isVideoOn = true;
+
+            const jitsiFrame = document.getElementById('jitsiConferenceFrame');
+            if (jitsiFrame) {
+                 jitsiFrame.remove(); 
+            }
+            if (jitsiApi) {
+                jitsiApi.dispose();
+                jitsiApi = null;
+            }
+            
+           
+            const videoIframePlaceholder = document.querySelector('#video-call iframe'); 
+            videoIframePlaceholder.style.display = 'none';
+            document.querySelector('#video-call .video-placeholder-icon').style.display = 'block';
+            document.querySelector('#video-call .video-placeholder-text').textContent = 'Clique em "Iniciar Chamada" para começar';
+            
+            document.getElementById('callControls').style.display = 'none';
+            document.getElementById('muteIcon').className = 'fas fa-microphone';
+            document.getElementById('videoIcon').className = 'fas fa-video';
+            updateDashboardStats();
+            showToast('Videochamada encerrada.', 'success');
+        }
+
+
+        function toggleMute() {
+            if (!jitsiApi || !currentCallActive) return;
+            isMuted = !isMuted;
+            jitsiApi.executeCommand('toggleAudio');
+            document.getElementById('muteIcon').className = isMuted ? 'fas fa-microphone-slash' : 'fas fa-microphone';
+            showToast(isMuted ? 'Microfone desativado.' : 'Microfone ativado.', 'info');
+        }
+
+        function toggleVideo() {
+            if (!jitsiApi || !currentCallActive) return;
+            isVideoOn = !isVideoOn;
+            jitsiApi.executeCommand('toggleVideo');
+            document.getElementById('videoIcon').className = isVideoOn ? 'fas fa-video' : 'fas fa-video-slash';
+            showToast(isVideoOn ? 'Vídeo ativado.' : 'Vídeo desativado.', 'info');
+        }
+
+        function endCall() {
+            if (jitsiApi) {
+                jitsiApi.executeCommand('hangup');
+               
+            } else {
+                endCallCleanup();
+            }
+        }
+        
+        function generateReport() {
+            const reportType = document.getElementById('reportType').value;
+            const reportPeriod = document.getElementById('reportPeriod').value; 
+            const outputDiv = document.getElementById('reportOutput');
+            outputDiv.innerHTML = ''; 
+            outputDiv.classList.remove('patients-grid-empty');
+
+            let reportHTML = `<h4>Relatório de ${reportType.charAt(0).toUpperCase() + reportType.slice(1)} (Período: ${reportPeriod.replace("_", " ")})</h4>`;
+            reportHTML += `<ul style="list-style-type: disc; padding-left: 20px; margin-top:10px;">`;
+
+            let itemsFound = false;
+
+            if (reportType === 'patients') {
+                if(db.patients.length > 0) {
+                    itemsFound = true;
+                    db.patients.forEach(p => {
+                        reportHTML += `<li>${sanitizeHTML(p.nome)} (Nasc: ${new Date(p.nascimento).toLocaleDateString('pt-BR')}) - Diagnóstico: ${sanitizeHTML(p.diagnostico || 'N/A')}</li>`;
+                    });
+                }
+            } else if (reportType === 'appointments') {
+                 if(db.appointments.length > 0) {
+                    itemsFound = true;
+                    db.appointments.sort((a,b) => new Date(a.data + 'T' + a.horario) - new Date(b.data + 'T' + b.horario)).forEach(a => {
+                        const patient = db.patients.find(p => p.id === a.pacienteId);
+                        reportHTML += `<li>Consulta: ${new Date(a.data).toLocaleDateString('pt-BR')} ${a.horario} - Paciente: ${sanitizeHTML(patient ? patient.nome : 'N/A')} - Tipo: ${a.tipo}</li>`;
+                    });
+                }
+            } else if (reportType === 'prescriptions') {
+                 if(db.prescriptions.length > 0) {
+                    itemsFound = true;
+                    db.prescriptions.sort((a,b) => new Date(a.dataEmissao) - new Date(b.dataEmissao)).forEach(pr => {
+                        const patient = db.patients.find(p => p.id === pr.pacienteId);
+                        reportHTML += `<li>Receita: ${sanitizeHTML(pr.medicamento)} - Paciente: ${sanitizeHTML(patient ? patient.nome : 'N/A')} - Data: ${new Date(pr.dataEmissao).toLocaleDateString('pt-BR')}</li>`;
+                    });
+                }
+            }
+            reportHTML += `</ul>`;
+
+            if (!itemsFound) {
+                outputDiv.innerHTML = `<p class="patients-grid-empty">Nenhum dado encontrado para este relatório.</p>`;
+            } else {
+                 outputDiv.innerHTML = reportHTML;
+            }
+            showToast('Relatório gerado (simulado).', 'info');
+        }
+
+        // --- Funções de menssagem ---
+        function renderConversationsList(filterTerm = '') {
+            conversationListEl.innerHTML = '';
+            const searchTerm = filterTerm.toLowerCase().trim();
+
+        
+            const sortedConversations = [...db.conversations].sort((a, b) => {
+                return new Date(b.lastMessageTimestamp) - new Date(a.lastMessageTimestamp);
+            });
+            
+            let filteredConversations = sortedConversations;
+            if (searchTerm) {
+                filteredConversations = sortedConversations.filter(convo => {
+                    const patient = db.patients.find(p => p.id === convo.patientId);
+                    return patient && patient.nome.toLowerCase().includes(searchTerm);
+                });
+            }
+
+
+            if (filteredConversations.length === 0) {
+                conversationListEl.innerHTML = '<li class="conversation-item-empty">Nenhuma conversa encontrada.</li>';
+                return;
+            }
+
+            filteredConversations.forEach(convo => {
+                const patient = db.patients.find(p => p.id === convo.patientId);
+                if (!patient) return; 
+
+                const lastMsg = db.messages
+                    .filter(msg => msg.conversationId === convo.id)
+                    .sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp))[0];
+
+                const li = document.createElement('li');
+                li.className = 'conversation-item';
+                li.dataset.conversationId = convo.id;
+                li.dataset.patientId = patient.id; // armazena o id do paciente 
+                if (convo.id === activeConversationId) {
+                    li.classList.add('active');
+                }
+
+                const unreadMessages = db.messages.filter(msg => msg.conversationId === convo.id && msg.senderId !== currentDoctorId && !msg.isRead).length;
+
+                li.innerHTML = `
+                    <div class="conversation-avatar">${getInitials(patient.nome)}</div>
+                    <div class="conversation-details">
+                        <span class="conversation-name">${sanitizeHTML(patient.nome)}</span>
+                        <span class="conversation-snippet">${sanitizeHTML(lastMsg ? lastMsg.text : 'Nenhuma mensagem ainda...')}</span>
+                    </div>
+                    <div class="conversation-meta">
+                        <span class="conversation-time">${lastMsg ? new Date(lastMsg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ''}</span>
+                        ${unreadMessages > 0 ? `<span class="conversation-unread-badge">${unreadMessages}</span>` : ''}
+                    </div>
+                `;
+                conversationListEl.appendChild(li);
+            });
+        }
+
+        function handleConversationSelect(event) {
+            const targetLi = event.target.closest('.conversation-item');
+            if (!targetLi || targetLi.classList.contains('conversation-item-empty')) return;
+
+            const conversationId = parseInt(targetLi.dataset.conversationId);
+            const patientId = parseInt(targetLi.dataset.patientId);
+            
+            selectConversation(conversationId, patientId);
+        }
+        
+        function selectConversation(conversationId, patientId) {
+            activeConversationId = conversationId;
+
+        
+            document.querySelectorAll('.conversation-item').forEach(item => item.classList.remove('active'));
+            const activeLi = conversationListEl.querySelector(`.conversation-item[data-conversation-id="${conversationId}"]`);
+            if (activeLi) activeLi.classList.add('active');
+
+            renderChatView(conversationId, patientId);
+            messagingPlaceholderEl.style.display = 'none';
+            chatViewEl.style.display = 'flex';
+
+            
+            db.messages.forEach(msg => {
+                if (msg.conversationId === conversationId && msg.senderId !== currentDoctorId) {
+                    msg.isRead = true;
+                }
+            });
+            const convo = db.conversations.find(c => c.id === conversationId);
+            if (convo) convo.unreadCount = 0; 
+            renderConversationsList(conversationSearchInput.value); 
+        }
+        
+        function clearChatView() {
+            activeConversationId = null;
+            chatCurrentPatientAvatarEl.textContent = '';
+            chatCurrentPatientNameEl.textContent = 'Nenhuma conversa selecionada';
+            messageDisplayAreaEl.innerHTML = '';
+            messagingPlaceholderEl.style.display = 'flex';
+            chatViewEl.style.display = 'none';
+            document.querySelectorAll('.conversation-item').forEach(item => item.classList.remove('active'));
+        }
+
+
+        function renderChatView(conversationId, patientId) {
+            const patient = db.patients.find(p => p.id === patientId);
+            if (!patient) {
+                showToast("Paciente não encontrado para esta conversa.", "error");
+                clearChatView();
+                return;
+            }
+
+            chatCurrentPatientAvatarEl.textContent = getInitials(patient.nome);
+            chatCurrentPatientNameEl.textContent = sanitizeHTML(patient.nome);
+            chatViewEl.dataset.currentConversationId = conversationId; 
+
+            messageDisplayAreaEl.innerHTML = '';
+            const messages = db.messages
+                .filter(msg => msg.conversationId === conversationId)
+                .sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+
+            messages.forEach(msg => {
+                const bubble = document.createElement('div');
+                bubble.classList.add('message-bubble');
+                bubble.classList.add(msg.senderId === currentDoctorId ? 'sent' : 'received');
+                bubble.innerHTML = `
+                    <p>${sanitizeHTML(msg.text)}</p>
+                    <span class="message-timestamp">${new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                `;
+                messageDisplayAreaEl.appendChild(bubble);
+            });
+            messageDisplayAreaEl.scrollTop = messageDisplayAreaEl.scrollHeight;
+        }
+
+        function sendMessageToConversation() {
+            const text = newMessageTextEl.value.trim();
+            if (!text || activeConversationId === null) return;
+
+            const conversationId = activeConversationId;
+
+            const newMessage = {
+                id: db.nextId.messages++,
+                conversationId: conversationId,
+                senderId: currentDoctorId,
+                text: text,
+                timestamp: getCurrentISOTimestamp(),
+                isRead: false 
+            };
+            db.messages.push(newMessage);
+
+            
+            const convo = db.conversations.find(c => c.id === conversationId);
+            if (convo) {
+                convo.lastMessageTimestamp = newMessage.timestamp;
+            }
+
+            newMessageTextEl.value = '';
+            newMessageTextEl.style.height = 'auto'; 
+            renderChatView(conversationId, db.conversations.find(c => c.id === conversationId).patientId);
+            renderConversationsList(conversationSearchInput.value); 
+            newMessageTextEl.focus();
+        }
+
+        function populatePatientSelectForNewMessage() {
+            const firstOptionHTML = messagePatientSelect.options[0] ? messagePatientSelect.options[0].outerHTML : '<option value="">Selecione um paciente</option>';
+            messagePatientSelect.innerHTML = firstOptionHTML;
+
+            const patientsWithConversations = db.conversations.map(c => c.patientId);
+            
+            db.patients
+                .filter(p => !patientsWithConversations.includes(p.id))
+                .sort((a, b) => a.nome.localeCompare(b.nome))
+                .forEach(patient => {
+                    const option = document.createElement('option');
+                    option.value = patient.id;
+                    option.textContent = sanitizeHTML(patient.nome);
+                    messagePatientSelect.appendChild(option);
+            });
+        }
+        
+        function handleNewMessageFormSubmit(e) {
+            e.preventDefault();
+            const patientId = parseInt(messagePatientSelect.value);
+            const messageText = initialMessageText.value.trim();
+
+            if (isNaN(patientId) || !messageText) {
+                showToast("Selecione um paciente e digite uma mensagem.", "error");
+                return;
+            }
+
+            
+            let conversation = db.conversations.find(c => c.patientId === patientId);
+
+            if (!conversation) {
+                conversation = {
+                    id: db.nextId.conversations++,
+                    patientId: patientId,
+                    lastMessageTimestamp: getCurrentISOTimestamp(),
+                    unreadCount: 0 
+                };
+                db.conversations.push(conversation);
+            } else {
+              
+                conversation.lastMessageTimestamp = getCurrentISOTimestamp();
+            }
+
+            const newMessage = {
+                id: db.nextId.messages++,
+                conversationId: conversation.id,
+                senderId: currentDoctorId, 
+                text: messageText,
+                timestamp: conversation.lastMessageTimestamp,
+                isRead: false 
+            };
+            db.messages.push(newMessage);
+            
+            closeModal('newMessageModal');
+            renderConversationsList(conversationSearchInput.value);
+            selectConversation(conversation.id, patientId); 
+            showToast("Conversa iniciada!", "success");
+        }
+
+
+    })(); // Fim da IIFE
+    </script>
+    <!-- Jitsi Meet API Externa -->
+    <script src='https://meet.jit.si/external_api.js'></script>
+</body>
+</html>

@@ -1,0 +1,1308 @@
+/* Reset Básico e Variáveis de Cor Ergonômicas (Tema Medicina) */
+:root {
+    --primary-color: #00796B;       /* Teal escuro (para botões principais, links ativos) */
+    --primary-color-light: #B2DFDB;   /* Teal claro (para hover, fundos sutis) */
+    --primary-color-dark: #004D40;    /* Teal mais escuro (para borders ou texto sobre fundos claros) */
+
+    --secondary-color: #1E88E5;     /* Azul (para ícones, informações secundárias, headers) */
+    --secondary-color-light: #BBDEFB; /* Azul claro */
+
+    --accent-color: #FFB300;        /* Âmbar/Amarelo (para alertas, notificações importantes mas não críticas) */
+
+    --text-color-dark: #263238;     /* Cinza azulado muito escuro (para texto principal) */
+    --text-color-medium: #546E7A;   /* Cinza azulado médio (para texto secundário, placeholders) */
+    --text-color-light: #FFFFFF;     /* Branco (para texto sobre fundos escuros) */
+    --text-color-on-primary: #FFFFFF;/* Texto sobre a cor primária */
+
+    --bg-color-page: #F4F6F8;       /* Cinza muito claro (fundo da página) */
+    --bg-color-sidebar: #FFFFFF;    /* Branco (fundo da sidebar) */
+    --bg-color-main: #FFFFFF;       /* Branco (fundo do conteúdo principal) */
+    --bg-color-card: #FFFFFF;       /* Branco (fundo dos cards) */
+    --bg-color-modal: #FFFFFF;      /* Branco (fundo dos modais) */
+    --bg-color-input: #FFFFFF;      /* Branco (fundo dos inputs) */
+    --bg-color-hover: #E0F2F1;      /* Teal bem clarinho para hovers em listas/menus */
+
+
+    --border-color: #CFD8DC;        /* Cinza claro (para bordas gerais, divisores) */
+    --border-color-input: #B0BEC5;  /* Cinza para bordas de input */
+    --border-color-input-focus: var(--primary-color);
+
+    --success-color: #4CAF50;       /* Verde (para mensagens de sucesso, status "ativo") */
+    --success-bg-color: #E8F5E9;
+    --error-color: #D32F2F;         /* Vermelho (para mensagens de erro, deleções) */
+    --error-bg-color: #FFEBEE;
+    --warning-color: #FFA000;       /* Laranja/Amarelo (para avisos, status "pendente") */
+    --warning-bg-color: #FFF8E1;
+    --info-color: var(--secondary-color); /* Azul para informações */
+    --info-bg-color: #E3F2FD;
+
+
+    --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    --box-shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.06);
+    --box-shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --border-radius-small: 4px;
+    --border-radius-medium: 8px;
+    --border-radius-large: 12px;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px; /* Base font size */
+}
+
+body {
+    font-family: var(--font-family-sans-serif);
+    line-height: 1.6;
+    color: var(--text-color-dark);
+    background-color: var(--bg-color-page);
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- Estrutura Principal --- */
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.dash-menu {
+ position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px; 
+            height: 100vh; /* Altura total da viewport */
+            background-color: #fff; /* Cor de fundo para o menu */
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1); /* Sombra opcional para dar profundidade */
+            z-index: 1000; /* Garante que o menu fique na frente */
+            display: flex;
+            flex-direction: column;
+        }
+
+.dash-menu .sidebar {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.dash-menu .logo {
+    padding: 25px 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+    flex-shrink: 0; /* Não encolher o logo */
+}
+
+.dash-menu .logo h2 {
+    font-size: 1.5rem;
+    color: var(--primary-color-dark);
+    margin-bottom: 5px;
+}
+.dash-menu .logo h2 i {
+    margin-right: 10px;
+    color: var(--primary-color);
+}
+.dash-menu .logo p {
+    font-size: 0.8rem;
+    color: var(--text-color-medium);
+}
+
+
+.nav-menu {
+    list-style: none;
+    padding: 15px 0;
+    margin: 0;
+    overflow-y: auto; /* Scroll para a lista de menu se necessário */
+    flex-grow: 1; /* Ocupar espaço restante */
+}
+
+.nav-item {
+    margin: 0;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: var(--text-color-medium);
+    font-weight: 500;
+    transition: background-color 0.2s ease, color 0.2s ease, border-left 0.2s ease;
+    border-left: 4px solid transparent; /* Para o indicador ativo */
+}
+
+.nav-link i {
+    margin-right: 15px;
+    width: 20px; /* Alinhamento dos ícones */
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--secondary-color);
+}
+
+.nav-link:hover {
+    background-color: var(--bg-color-hover);
+    color: var(--primary-color-dark);
+    border-left-color: var(--primary-color-light);
+}
+.nav-link:hover i {
+    color: var(--primary-color);
+}
+
+.nav-link.active {
+    background-color: var(--primary-color-light);
+    color: var(--primary-color-dark);
+    border-left-color: var(--primary-color);
+    font-weight: 600;
+}
+.nav-link.active i {
+    color: var(--primary-color);
+}
+
+.main-content {
+    margin-left: 260px; /* Igual à largura da .dash-menu */
+    padding: 0; /* Header cuidará do padding */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    background-color: var(--bg-color-main);
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: var(--box-shadow-soft);
+    position: sticky; /* Header fixo no topo do main-content */
+    top: 0;
+    z-index: 900;
+}
+
+.header .welcome h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.3rem;
+    color: var(--text-color-dark);
+}
+.header .welcome p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-color-medium);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+.user-info .avatar {
+    width: 40px;
+    height: 40px;
+    background-color: var(--secondary-color);
+    color: var(--text-color-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-right: 10px;
+    font-size: 0.9rem;
+}
+.user-info span {
+    margin-right: 20px;
+    font-weight: 500;
+    color: var(--text-color-dark);
+}
+
+
+/* --- Seções de Conteúdo --- */
+.content-section {
+    padding: 30px;
+    display: none; /* Controlado por JS para mostrar a seção ativa */
+}
+.content-section.active {
+    display: block;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+.section-title {
+    font-size: 1.8rem;
+    color: var(--secondary-color);
+    margin: 0;
+}
+
+/* --- Botões --- */
+.btn {
+    padding: 10px 18px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: none;
+    border-radius: var(--border-radius-medium);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+    text-transform: capitalize;
+}
+.btn i {
+    margin-right: 8px;
+}
+.btn:hover {
+    box-shadow: var(--box-shadow-soft);
+    transform: translateY(-1px);
+}
+
+.btn:active {
+    transform: translateY(0px);
+    box-shadow: none;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--text-color-on-primary);
+}
+.btn-primary:hover {
+    background-color: var(--primary-color-dark);
+}
+
+.btn-success {
+    background-color: var(--success-color);
+    color: var(--text-color-light);
+}
+.btn-success:hover {
+    background-color: #388E3C; /* Darker green */
+}
+
+.btn-danger {
+    background-color: var(--error-color);
+    color: var(--text-color-light);
+}
+.btn-danger:hover {
+    background-color: #C62828; /* Darker red */
+}
+
+.btn-sm {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+}
+
+/* --- Cards e Grids --- */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background-color: var(--bg-color-card);
+    padding: 20px;
+    border-radius: var(--border-radius-medium);
+    box-shadow: var(--box-shadow-soft);
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--box-shadow-medium);
+}
+
+.stat-icon {
+    font-size: 2.2rem;
+    color: var(--secondary-color);
+    margin-right: 20px;
+    padding: 12px;
+    background-color: var(--secondary-color-light);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.stat-card:nth-child(1) .stat-icon { background-color: #E3F2FD; color: #1E88E5;} /* Pacientes - Azul */
+.stat-card:nth-child(2) .stat-icon { background-color: #E8F5E9; color: #4CAF50;} /* Consultas - Verde */
+.stat-card:nth-child(3) .stat-icon { background-color: #FFF8E1; color: #FFA000;} /* Video - Laranja */
+.stat-card:nth-child(4) .stat-icon { background-color: #E0F2F1; color: #00796B;} /* Receitas - Teal */
+
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--text-color-dark);
+}
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--text-color-medium);
+    margin-top: 4px;
+}
+
+
+/* --- Busca --- */
+.search-container {
+    position: relative;
+    margin-bottom: 20px;
+    max-width: 400px; /* Limita largura da busca */
+}
+.search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-color-medium);
+}
+.search-input {
+    width: 100%;
+    padding: 12px 15px 12px 45px; /* Espaço para o ícone */
+    border: 1px solid var(--border-color-input);
+    border-radius: var(--border-radius-medium);
+    font-size: 0.95rem;
+    color: var(--text-color-dark);
+    background-color: var(--bg-color-input);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.search-input:focus {
+    outline: none;
+    border-color: var(--border-color-input-focus);
+    box-shadow: 0 0 0 2px rgba(0, 121, 107, 0.2); /* Foco com cor primária */
+}
+.search-input::placeholder {
+    color: var(--text-color-medium);
+    opacity: 0.7;
+}
+
+
+/* --- Grid de Pacientes e Cards Similares --- */
+.patients-grid,
+#prescriptionsListContainer .patients-grid, /* Aplicar o mesmo estilo de grid */
+#appointmentsListContainer .patients-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+.patients-grid-empty {
+    color: var(--text-color-medium);
+    padding: 20px;
+    background-color: var(--bg-color-card);
+    border-radius: var(--border-radius-medium);
+    text-align: center;
+    font-style: italic;
+}
+
+.patient-card {
+    background-color: var(--bg-color-card);
+    border-radius: var(--border-radius-medium);
+    box-shadow: var(--box-shadow-soft);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.patient-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--box-shadow-medium);
+}
+
+.patient-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+.patient-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-color-dark);
+}
+.patient-status {
+    font-size: 0.8rem;
+    padding: 4px 10px;
+    border-radius: var(--border-radius-small);
+    font-weight: 500;
+    text-transform: capitalize;
+}
+.status-active, .status-hoje, .status-realizada { /* Para pacientes ativos e consultas "hoje" ou "realizada" */
+    background-color: var(--success-bg-color);
+    color: var(--success-color);
+}
+.status-pending {
+    background-color: var(--warning-bg-color);
+    color: var(--warning-color);
+}
+.status-emitida { /* Para receitas */
+    background-color: var(--info-bg-color);
+    color: var(--info-color);
+}
+
+
+.patient-info p {
+    font-size: 0.9rem;
+    color: var(--text-color-medium);
+    margin-bottom: 8px;
+}
+.patient-info p strong {
+    color: var(--text-color-dark);
+    font-weight: 500;
+}
+
+.patient-actions {
+    margin-top: auto; /* Empurra para baixo */
+    padding-top: 15px;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    gap: 10px; /* Espaço entre botões */
+}
+.patient-actions .btn {
+    flex-grow: 1; /* Botões ocupam espaço igual */
+}
+
+
+/* --- Videochamada --- */
+.video-call-container {
+    background-color: var(--bg-color-card);
+    padding: 20px;
+    border-radius: var(--border-radius-medium);
+    box-shadow: var(--box-shadow-soft);
+}
+.video-placeholder {
+    width: 100%;
+    min-height: 300px; /* Altura mínima */
+    background-color: #333; /* Fundo escuro para contraste com vídeo */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #ccc;
+    border-radius: var(--border-radius-small);
+    margin-bottom: 15px;
+    position: relative; /* Para o iframe */
+}
+.video-placeholder iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: var(--border-radius-small);
+}
+.video-placeholder-icon {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    color: var(--secondary-color);
+}
+.video-placeholder-text {
+    font-size: 1rem;
+}
+
+.call-controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+.call-btn {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--text-color-light);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    transition: background-color 0.2s ease;
+}
+.call-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+.call-btn.mute i.fa-microphone-slash,
+.call-btn.video i.fa-video-slash {
+    color: var(--warning-color);
+}
+.call-btn.end {
+    background-color: var(--error-color);
+}
+.call-btn.end:hover {
+    background-color: var(--error-color-dark);
+}
+
+/* --- Relatórios --- */
+#reportOutput {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: var(--bg-color-card);
+    border-radius: var(--border-radius-medium);
+    box-shadow: var(--box-shadow-soft);
+    color: var(--text-color-dark);
+}
+#reportOutput h4 {
+    color: var(--secondary-color);
+    margin-bottom: 15px;
+}
+#reportOutput ul {
+    list-style-type: disc;
+    padding-left: 25px;
+}
+#reportOutput li {
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+
+/* --- Modais --- */
+.modal {
+    display: none; /* Hidden by default, shown by JS */
+    position: fixed;
+    z-index: 1050;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6); /* Fundo escurecido */
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: var(--bg-color-modal);
+    margin: auto;
+    padding: 30px;
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--box-shadow-medium);
+    width: 90%;
+    max-width: 600px; /* Largura máxima para modais */
+    position: relative;
+    animation: modalFadeIn 0.3s ease-out;
+}
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+.modal-title {
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+    margin: 0;
+}
+.close-modal-btn {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: var(--text-color-medium);
+    cursor: pointer;
+    padding: 0 5px;
+    line-height: 1;
+}
+.close-modal-btn:hover {
+    color: var(--text-color-dark);
+}
+
+/* --- Formulários nos Modais e outras seções --- */
+.form-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 15px;
+}
+.form-row .form-group {
+    flex: 1; /* Grupos ocupam espaço igual */
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.form-label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-color-medium);
+    margin-bottom: 8px;
+}
+.form-control {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 0.95rem;
+    border: 1px solid var(--border-color-input);
+    border-radius: var(--border-radius-medium);
+    background-color: var(--bg-color-input);
+    color: var(--text-color-dark);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.form-control:focus {
+    outline: none;
+    border-color: var(--border-color-input-focus);
+    box-shadow: 0 0 0 2px rgba(0, 121, 107, 0.2);
+}
+.form-control[type="file"] {
+    padding: 8px 12px; /* Ajuste para input file */
+}
+textarea.form-control {
+    min-height: 80px;
+    resize: vertical;
+}
+select.form-control {
+    appearance: none; /* Remove estilo padrão do select */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23546E7A'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E"); /* Seta customizada */
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 1.2em;
+    padding-right: 35px; /* Espaço para seta */
+}
+
+#patientForm .btn,
+#prescriptionForm .btn,
+#appointmentForm .btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px; /* Espaço acima do botão de salvar */
+}
+
+/* --- Toast Notifications --- */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px); /* Começa fora da tela */
+    background-color: var(--text-color-dark);
+    color: var(--text-color-light);
+    padding: 12px 20px;
+    border-radius: var(--border-radius-medium);
+    box-shadow: var(--box-shadow-medium);
+    z-index: 1100;
+    font-size: 0.95rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+}
+.toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+.toast.success {
+    background-color: var(--success-color);
+}
+.toast.error {
+    background-color: var(--error-color);
+}
+.toast.info {
+    background-color: var(--info-color);
+}
+
+
+/* Media Queries para Responsividade (Exemplo básico) */
+@media (max-width: 992px) {
+    .dash-menu {
+        width: 220px;
+    }
+    .main-content {
+            margin-left: 280px; /* Deve ser igual à largura definida para .dash-menu */
+            padding: 20px; /* Espaçamento interno para o conteúdo principal */
+            /* A rolagem do main-content será natural se o conteúdo exceder a altura da viewport */
+        }
+    .stats-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .dash-menu {
+        /* Para telas menores, você pode querer um menu que se esconde/mostra */
+        /* Exemplo: transform: translateX(-100%); */
+        /* E um botão para abri-lo */
+        position: fixed; /* Mantém fixo se estiver visível */
+        left: -260px; /* Esconde por padrão */
+        transition: left 0.3s ease-in-out;
+    }
+    .dash-menu.open { /* Adicionar classe .open via JS */
+        left: 0;
+    }
+    .main-content {
+        margin-left: 0; /* Conteúdo ocupa toda a largura */
+    }
+    .header {
+        padding: 15px;
+    }
+    .header .welcome h3 {
+        font-size: 1.1rem;
+    }
+    /* Adicionar um botão "hamburger" no header para abrir/fechar o menu */
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+    .form-row {
+        flex-direction: column;
+        gap: 0; /* Remove gap quando empilhado */
+    }
+    .modal-content {
+        width: 95%;
+        padding: 20px;
+    }
+    .stats-grid {
+        grid-template-columns: 1fr; /* Cards em uma coluna */
+    }
+    .patients-grid,
+    #prescriptionsListContainer .patients-grid,
+    #appointmentsListContainer .patients-grid {
+        grid-template-columns: 1fr; /* Cards em uma coluna */
+    }
+}
+/* --- Seção de Mensagens --- */
+#messaging .section-header { /* Para remover borda inferior se não quiser */
+    border-bottom: none;
+    margin-bottom: 15px;
+}
+
+.messaging-container {
+    display: flex;
+    height: calc(100vh - 180px); /* Ajuste conforme altura do seu header e padding da seção */
+    /* Exemplo: 100vh - (altura do .header + padding superior/inferior da .content-section + .section-header) */
+    /* Se a altura do header for 70px e padding da content-section for 30px em cima e em baixo, section-header 55px: */
+    /* 100vh - (70px + 60px + 55px) = 100vh - 185px. Ajuste esse valor! */
+    background-color: var(--bg-color-main);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-medium);
+    box-shadow: var(--box-shadow-soft);
+    overflow: hidden; /* Para conter os elementos internos */
+}
+
+.messaging-sidebar {
+    width: 320px; /* Largura da sidebar de conversas */
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-color-sidebar); /* Pode ser um pouco diferente se quiser */
+}
+
+.messaging-sidebar-header {
+    padding: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.btn-compose { /* Estilo similar ao "Compor" do Gmail */
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 0.95rem;
+    background-color: var(--secondary-color-light); /* Azul claro, como no Gmail */
+    color: var(--secondary-color); /* Texto azul escuro */
+    border-radius: 24px; /* Bem arredondado */
+    box-shadow: var(--box-shadow-soft);
+}
+.btn-compose:hover {
+    background-color: #CFD8DC; /* Um cinza claro no hover */
+    color: var(--secondary-color);
+    box-shadow: var(--box-shadow-medium);
+}
+.btn-compose i {
+    margin-right: 10px;
+}
+
+
+.conversation-search-container {
+    padding: 15px;
+    border-bottom: 1px solid var(--border-color);
+    position: relative; /* Para o ícone de busca */
+}
+.conversation-search-container .search-input {
+    background-color: var(--bg-color-page); /* Fundo mais claro para o input */
+    border-radius: var(--border-radius-medium);
+    padding-left: 40px; /* Espaço para o ícone */
+}
+.conversation-search-container .search-icon {
+    left: 25px; /* Ajuste da posição do ícone */
+    color: var(--text-color-medium);
+}
+
+.conversation-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow-y: auto;
+    flex-grow: 1; /* Ocupa o espaço restante */
+}
+
+.conversation-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border-color-light);
+    transition: background-color 0.2s ease;
+}
+.conversation-item:hover {
+    background-color: var(--bg-color-hover); /* Teal bem clarinho */
+}
+.conversation-item.active {
+    background-color: var(--primary-color-light); /* Destaque azul/teal claro */
+    border-left: 4px solid var(--primary-color);
+    padding-left: 11px; /* Ajuste por causa da borda */
+}
+.conversation-item.active .conversation-name {
+    font-weight: 600;
+    color: var(--primary-color-dark);
+}
+
+.conversation-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--secondary-color);
+    color: var(--text-color-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+
+.conversation-details {
+    flex-grow: 1;
+    overflow: hidden; /* Para o snippet não quebrar o layout */
+}
+.conversation-name {
+    display: block;
+    font-weight: 500;
+    color: var(--text-color-dark);
+    font-size: 0.95rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.conversation-snippet {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-color-medium);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.conversation-meta {
+    margin-left: 10px;
+    text-align: right;
+    flex-shrink: 0;
+}
+.conversation-time {
+    font-size: 0.75rem;
+    color: var(--text-color-medium);
+    display: block;
+    margin-bottom: 3px;
+}
+.conversation-unread-badge {
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-weight: bold;
+    display: inline-block; /* Para não quebrar linha se o tempo for curto */
+}
+
+
+/* Conteúdo Principal das Mensagens */
+.messaging-main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-color-main);
+}
+
+.messaging-placeholder {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--text-color-medium);
+    padding: 20px;
+}
+.messaging-placeholder .placeholder-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    color: var(--border-color);
+}
+
+.chat-view {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Ocupar toda a altura do .messaging-main-content */
+}
+
+.chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--bg-color-sidebar); /* Mesmo fundo da sidebar de conversas */
+    flex-shrink: 0;
+}
+.chat-header-patient-info {
+    display: flex;
+    align-items: center;
+}
+.chat-header .chat-avatar { /* Reutiliza e ajusta o avatar */
+    width: 36px;
+    height: 36px;
+    font-size: 0.85rem;
+    margin-right: 10px;
+    background-color: var(--secondary-color-light);
+    color: var(--secondary-color);
+}
+.chat-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--text-color-dark);
+}
+.chat-header-actions .btn-icon {
+    background: none;
+    border: none;
+    color: var(--text-color-medium);
+    font-size: 1.2rem;
+    padding: 8px;
+    margin-left: 5px;
+    border-radius: 50%;
+}
+.chat-header-actions .btn-icon:hover {
+    background-color: var(--bg-color-hover);
+    color: var(--primary-color);
+}
+
+
+.message-display-area {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column-reverse; /* Novas mensagens aparecem embaixo e o scroll fica embaixo */
+    background-color: var(--bg-color-page); /* Fundo levemente diferente para a área de chat */
+}
+
+.message-bubble {
+    max-width: 70%;
+    padding: 10px 15px;
+    border-radius: 18px;
+    margin-bottom: 10px;
+    line-height: 1.4;
+    word-wrap: break-word;
+}
+.message-bubble p {
+    margin: 0 0 5px 0;
+    font-size: 0.95rem;
+}
+.message-bubble .message-timestamp {
+    font-size: 0.75rem;
+    color: var(--text-color-medium);
+    display: block;
+    text-align: right;
+}
+
+.message-bubble.sent {
+    background-color: var(--primary-color);
+    color: var(--text-color-on-primary);
+    align-self: flex-end;
+    border-bottom-right-radius: 6px; /* "Rabicho" da bolha */
+}
+.message-bubble.sent .message-timestamp {
+    color: rgba(255,255,255,0.7);
+}
+
+.message-bubble.received {
+    background-color: var(--bg-color-card); /* Fundo branco para recebidas */
+    color: var(--text-color-dark);
+    align-self: flex-start;
+    border: 1px solid var(--border-color-light);
+    border-bottom-left-radius: 6px; /* "Rabicho" da bolha */
+    box-shadow: var(--box-shadow-soft);
+}
+.message-bubble.received .message-timestamp {
+    color: var(--text-color-medium);
+}
+
+
+.message-input-area {
+    display: flex;
+    align-items: flex-end; /* Alinha o botão com a base do textarea se ele crescer */
+    padding: 15px 20px;
+    border-top: 1px solid var(--border-color);
+    background-color: var(--bg-color-sidebar); /* Mesmo fundo da sidebar de conversas */
+    flex-shrink: 0;
+}
+.message-input-area .btn-attach {
+    margin-right: 10px;
+    font-size: 1.2rem;
+    padding: 10px;
+}
+.message-input-area textarea {
+    flex-grow: 1;
+    padding: 10px 12px;
+    border: 1px solid var(--border-color-input);
+    border-radius: var(--border-radius-medium);
+    resize: none; /* Impede redimensionamento manual, JS pode controlar altura */
+    min-height: 42px; /* Altura inicial */
+    max-height: 120px; /* Altura máxima */
+    overflow-y: auto; /* Scroll se o texto for muito grande */
+    font-family: var(--font-family-sans-serif);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+.message-input-area textarea:focus {
+    outline: none;
+    border-color: var(--border-color-input-focus);
+    box-shadow: 0 0 0 2px rgba(0, 121, 107, 0.2);
+}
+.message-input-area .btn-send-message {
+    margin-left: 10px;
+    padding: 10px 15px; /* Um pouco maior */
+}
+.message-input-area .btn-send-message i {
+    margin-right: 5px; /* Menor margem no ícone de enviar */
+}
+ .user-info .icon-link {
+            color: #6c757d; /* Or your theme's icon color */
+            font-size: 1.5rem;
+            margin-right: 15px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 5px;
+            border-radius: 50%;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .user-info .icon-link:hover {
+            background-color: #f0f0f0;
+            color: #007bff; /* Or your theme's primary color */
+        }
+
+        .messaging-container {
+            display: flex;
+            height: calc(100vh - 200px); /* Adjust as needed based on header/footer */
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #fff;
+        }
+        .messaging-sidebar {
+            width: 300px;
+            border-right: 1px solid #e0e0e0;
+            display: flex;
+            flex-direction: column;
+        }
+        .messaging-sidebar-header {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .btn-compose { width: 100%; }
+
+        .conversation-search-container {
+            padding: 10px 15px;
+            position: relative;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .conversation-search-container .search-icon {
+            position: absolute;
+            left: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #aaa;
+        }
+        .conversation-search-container .search-input {
+            width: 100%;
+            padding: 8px 8px 8px 30px; /* Make space for icon */
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .conversation-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+        .conversation-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            cursor: pointer;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background-color 0.2s;
+        }
+        .conversation-item:hover { background-color: #f5f5f5; }
+        .conversation-item.active { background-color: #eef5ff; border-left: 3px solid #007bff; }
+        .conversation-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #007bff;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 12px;
+            font-size: 0.9em;
+        }
+        .conversation-details { flex-grow: 1; }
+        .conversation-name { display: block; font-weight: 600; color: #333; }
+        .conversation-snippet {
+            font-size: 0.85em;
+            color: #666;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 150px; /* Adjust as needed */
+        }
+        .conversation-meta { text-align: right; font-size: 0.75em; color: #999; }
+        .conversation-time { display: block; margin-bottom: 3px; }
+        .conversation-unread-badge {
+            background-color: #dc3545;
+            color: white;
+            font-size: 0.7em;
+            padding: 3px 6px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .messaging-main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .messaging-placeholder {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #aaa;
+        }
+        .messaging-placeholder .placeholder-icon { font-size: 4rem; margin-bottom: 15px; }
+
+        .chat-view {
+            display: flex;
+            flex-direction: column;
+            height: 100%; /* Fill parent */
+        }
+        .chat-header {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #f8f9fa;
+        }
+        .chat-header-patient-info { display: flex; align-items: center; }
+        .chat-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: #6c757d;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 0.8em;
+        }
+        .chat-header h3 { margin: 0; font-size: 1.1em; }
+        .chat-header-actions .btn-icon {
+            background: none;
+            border: none;
+            color: #6c757d;
+            font-size: 1.2rem;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        .chat-header-actions .btn-icon:hover { color: #007bff; }
+
+        .message-display-area {
+            flex-grow: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        .message-bubble {
+            max-width: 70%;
+            padding: 10px 15px;
+            border-radius: 18px;
+            margin-bottom: 10px;
+            line-height: 1.4;
+            font-size: 0.9em;
+            word-wrap: break-word;
+        }
+        .message-bubble.sent {
+            background-color: #007bff;
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+        .message-bubble.received {
+            background-color: #e9ecef;
+            color: #333;
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+        .message-timestamp {
+            display: block;
+            font-size: 0.7em;
+            margin-top: 5px;
+            text-align: right;
+            opacity: 0.7;
+        }
+        .message-bubble.sent .message-timestamp { color: #f0f0f0; }
+        .message-bubble.received .message-timestamp { color: #666; }
+
+        .message-input-area {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            border-top: 1px solid #e0e0e0;
+            background-color: #f8f9fa;
+        }
+        .message-input-area textarea {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            resize: none;
+            min-height: 20px; /* Small initial height */
+            max-height: 100px; /* Limit expansion */
+            margin: 0 10px;
+            font-family: inherit;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+        .btn-attach, .btn-send-message {
+            padding: 8px 12px;
+        }
+        .btn-send-message i { margin-right: 5px; }

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cazenga Telemed</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="auth-page">
+
+  <header class="auth-header">
+    <div class="logo">
+      <i class="fas fa-clinic-medical"></i> Cazenga Telemed
+    </div>
+  </header>
+
+  <main class="auth-container">
+    <section class="auth-card content-section">
+      <h1 class="auth-title">Acessar Conta</h1>
+      <form id="formLogin" class="styled-form">
+        <div class="form-group">
+          <label for="emailLogin">E-mail:</label>
+          <input type="email" id="emailLogin" name="email" class="form-control" placeholder="seuemail@exemplo.com" required>
+        </div>
+        <div class="form-group">
+          <label for="senhaLogin">Senha:</label>
+          <input type="password" id="senhaLogin" name="senha" class="form-control" placeholder="Sua senha" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full-width">
+          <i class="fas fa-sign-in-alt"></i> Entrar
+        </button>
+        <div id="loginError" class="form-feedback error" aria-live="polite"></div>
+      </form>
+      <div class="auth-links">
+        <p>Não tem uma conta? <a href="cadastro.html">Cadastre-se</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer-bottom auth-footer">
+    <p>&copy; Cazenga Telemed Online. Todos os direitos reservados.</p>
+  </footer>
+  <script src="code.js"></script>
+</body>
+</html>
